@@ -38,7 +38,9 @@
               <img src="./assets/into.png" alt>
             </a>
           </div>
-          <div id="prepareDuty"></div>
+          <div id="prepareDuty">
+						<duty></duty>          	
+          </div>
         </div>
         <div>
           <div class="title circle-title">
@@ -48,11 +50,11 @@
             </a>
           </div>
 
-          <div class="under-pic">
+       
             <div class="circle-box">
               <vuePie></vuePie>
             </div>
-          </div>
+          
         </div>
       </div>
       <div class="content-middle">
@@ -64,21 +66,83 @@
         </div>
 
         <div class="chart-wrapper">
-          <h1>旋转地球</h1>
-          <div id="fireReson" style="100% 100%"></div>
-
-          <div class="block">
-            <span class="demonstration">Click 指示器触发</span>
-          </div>
+          <earth></earth>
         </div>
 
         <div class="table-wrapper">
           <div class="table-content">
-            <el-carousel trigger="click" height="150px">
-              <el-carousel-item v-for="item in 4" :key="item">
-                <h3>{{ item }}</h3>
-              </el-carousel-item>
-            </el-carousel>
+          	<div>
+          		<el-row >
+						  <el-col :span="6"><div class="grid-content bg-purple"><p class="ps">
+						  		发现火灾违法行为
+						  	</p>
+						  	<p class="numbers">
+						  		2,455
+						  	</p></div></el-col>
+						 
+						  <el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
+						  		下发行政处罚决定书
+						  	</p>
+						  	<p class="numbers">
+						  		2,455
+						  	</p></div></el-col>
+						  	<el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
+						  		下发行政处罚决定书
+						  	</p>
+						  	<p class="numbers">
+						  		2,455
+						  	</p></div></el-col>
+						  	 <el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
+						  		检查单位数
+						  	</p>
+						  	<p class="numbers">
+						  		2,455
+						  	</p></div></el-col>
+						  	 <el-col :span="3"><div class="grid-content bg-purple"><p class="ps">
+						  		拘留
+						  	</p>
+						  	<p class="numbers">
+						  	45
+						  	</p></div></el-col>
+						</el-row>
+          	</div>
+          	<div>
+      
+          		<el-row >
+						  <el-col :span="6"><div class="grid-content bg-purple"><p class="ps">
+						  		发现火灾违法行为
+						  	</p>
+						  	<p class="numbers">
+						  		2,455
+						  	</p></div></el-col>
+						 
+						  <el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
+						  		下发行政处罚决定书
+						  	</p>
+						  	<p class="numbers">
+						  		2,455
+						  	</p></div></el-col>
+						  	<el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
+						  		下发行政处罚决定书
+						  	</p>
+						  	<p class="numbers">
+						  		2,455
+						  	</p></div></el-col>
+						  	 <el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
+						  		检查单位数
+						  	</p>
+						  	<p class="numbers">
+						  		2,455
+						  	</p></div></el-col>
+						  	 <el-col :span="3"><div class="grid-content bg-purple"><p class="ps">
+						  		拘留
+						  	</p>
+						  	<p class="numbers">
+						  	45
+						  	</p></div></el-col>
+						</el-row>
+          	</div>
+            
           </div>
         </div>
       </div>
@@ -91,8 +155,10 @@
               <img src="./assets/into.png" alt>
             </a>
           </div>
-          <div class="under-pic"></div>
-          <!-- <div id="warningInfo" class="chart-box" style="width: 100%;"></div> -->
+          <div class="under-pic">
+          		<linechart></linechart>
+          </div>
+          
         </div>
         <div>
           <div class="title">
@@ -101,7 +167,9 @@
               <img src="./assets/into.png" alt>
             </a>
           </div>
-          <div class="under-pic"></div>
+          <div class="under-pic">
+          	<Agencies></Agencies>
+          </div>
         </div>
       </div>
     </div>
@@ -109,19 +177,26 @@
 </template>
 
 <script>
-import VueCircle from "vue2-circle-progress";
+
 import echarts from "echarts";
 import Stomp from "stompjs";
-import vueSeamless from "vue-seamless-scroll";
+
 import $ from "jquery";
 import { imgUrl } from "./assets/img/img";
 import { setTimeout, clearTimeout } from "timers";
 // 引入pie组件
 import vuePie from "./components/pie.vue";
+// 引入执勤值班组件
+import duty from "./components/duty.vue";
+// 引入机构运行组件
+import Agencies from './components/funal.vue'
+// 引入机构运行组件
+import linechart from './components/lineChart.vue'
+// 引入地球
+import earth from "./components/earthBall.vue"
+
 export default {
   name: "battleDutyIndex",
-  components: {},
-
   data() {
     return {
       dialogTableVisible: false,
@@ -132,12 +207,12 @@ export default {
       keyUnitName: [],
       keyUnitValue: [],
       coordinates: [],
-      fireFighting: [],
+     
       prepareList: [],
       weather: null,
       curTime: "",
       currCityName: "",
-      dutyChart: null,
+      
       keyUnitChart: null,
       fireResonChart: null,
       chinaMapChart: null,
@@ -146,8 +221,31 @@ export default {
       baseUrl: this.axios.defaults.baseURL.split("/ecp")[0],
       QNRTCUrl: localStorage.getItem("QNRTCUrl"),
       fill: { gradient: ["red", "green", "blue"] },
-      sortArr: ["zhidui", "dadui", "zhongdui", "police", "car", "drug"], // 消防实力排序
+      tableMiddle: [
+      {
+      	name:"发现火灾违法行为",
+      	value:"2,455"
+      },
+      {
+      	name:"下发行政处罚决定书",
+      	value:"2,455"
+      },
+      {
+      	name:"下发行政强制决定书",
+      	value:"2,455"
+      },
+      {
+      	name:"检查单位数",
+      	value:"2,455"
+      },
+      {
+      	name:"拘留",
+      	value:"45"
+      },
+      ], // 消防实力排序
       temp: []
+     
+     	
     };
   },
   created() {
@@ -163,23 +261,7 @@ export default {
       const { result } = data;
       if (status == 200 && result.length) this.prepareList = result;
     });
-    // 消防实力
-    this.axios.get("/dutyShow/selectPower").then(res => {
-      const { status, data } = res;
-      const { result } = data;
-      if (status == 200 && result) {
-        let newArr = [];
-        this.fireFighting = Object.entries(result);
-        for (var j = 0; j < this.sortArr.length; j++) {
-          for (var i = 0; i < this.fireFighting.length; i++) {
-            if (this.fireFighting[i][0] == this.sortArr[j]) {
-              newArr.push(this.fireFighting[i]);
-            }
-          }
-        }
-        this.fireFighting = newArr;
-      }
-    });
+   
     // 今日车辆等数据
     this.axios.get("/dutyShow/selectEmergencyCount").then(res => {
       const { status, data } = res;
@@ -246,791 +328,7 @@ export default {
       }/EMDY/dynamic.html?emergencyId=${id}`;
     },
 
-    // 设置effectscatter
-    initSeriesData: function(data) {
-      this.temp = [];
-      for (let i = 0; i < data.length; i++) {
-        // console.log(this.coordinates,'this.coordinates==============')
-        let geoCoord = this.coordinates[data[i].name];
-        if (geoCoord) {
-          this.temp.push({
-            symbol:
-              "image://" +
-              (data[i].emergencyType == "outfire"
-                ? imgUrl.hzpj
-                : data[i].emergencyType == "rescue"
-                ? imgUrl.qxjy
-                : data[i].emergencyType == "duty"
-                ? imgUrl.gwzq
-                : imgUrl.shjz),
-            name: data[i].name,
-            city: data[i].city,
-            createTime: data[i].createTime,
-            emergencyTypeName: data[i].emergencyTypeName,
-            value: geoCoord.concat(data[i].value, data[i].emergencyType),
-            emergencyType: data[i].emergencyType
-          });
-        }
-      }
-      // console.log(this.temp,'temp')
-      return this.temp;
-    },
-    extendsMap(echarts, id, opt) {
-      let that = this;
-      // 实例
-      that.chinaMapChart = echarts.init(document.getElementById(id));
-
-      let curGeoJson = {};
-
-      let geoCoordMap = this.coordinates;
-
-      let defaultOpt = {
-        mapName: "china", // 地图展示
-        goDown: false, // 是否下钻
-        bgColor: "#090918", // 画布背景色
-        activeArea: [], // 区域高亮,同echarts配置项
-        data: [],
-        // 下钻回调(点击的地图名、实例对象option、实例对象)
-        callback: function(name, option, instance) {}
-      };
-      if (opt) opt = echarts.util.extend(defaultOpt, opt);
-
-      // 层级索引
-      let name = [opt.mapName];
-      let idx = 0;
-      let pos = {
-        leftPlus: 40,
-        leftCur: 40,
-        left: 40,
-        top: 40
-      };
-
-      let line = [[0, 0], [8, 11], [0, 22]];
-      // style
-      let style = {
-        font: '18px "Microsoft YaHei", sans-serif',
-        textColor: "#eee",
-        lineColor: "rgba(147, 235, 248, .8)"
-      };
-
-      let handleEvents = {
-        /**
-         * i 实例对象
-         * o option
-         * n 地图名
-         **/
-        resetOption: function(i, o, n) {
-          let breadcrumb = this.createBreadcrumb(n);
-          let j = name.indexOf(n);
-          let l = o.graphic.length;
-          if (j < 0) {
-            o.graphic.push(breadcrumb);
-            o.graphic[0].children[0].shape.x2 = 145;
-            o.graphic[0].children[1].shape.x2 = 145;
-            if (o.graphic.length > 2) {
-              let cityData = [];
-              let cityJson;
-              for (let x = 0; x < opt.data.length; x++) {
-                if (n === opt.data[x].city) {
-                  $([opt.data[x]]).each(function(index, data) {
-                    cityJson = {
-                      name: data.name,
-                      city: data.city,
-                      createTime: data.createTime,
-                      value: data.coordinate,
-                      emergencyType: data.emergencyType,
-                      emergencyTypeName: data.emergencyTypeName
-                    };
-                    cityData.push(cityJson);
-                  });
-                }
-              }
-              if (cityData != null) {
-                o.series[0].data = that.initSeriesData(cityData);
-              } else {
-                o.series[0].data = [];
-              }
-            }
-            name.push(n);
-            idx++;
-          } else {
-            o.graphic.splice(j + 2, l);
-            if (o.graphic.length <= 2) {
-              o.graphic[0].children[0].shape.x2 = 60;
-              o.graphic[0].children[1].shape.x2 = 60;
-              o.series[0].data = that.initSeriesData(opt.data);
-            }
-            name.splice(j + 1, l);
-            idx = j;
-            pos.leftCur -= pos.leftPlus * (l - j - 1);
-          }
-
-          o.geo.map = n;
-          o.geo.zoom = 1;
-          i.clear();
-          i.setOption(o);
-          // this.zoomAnimation();
-          opt.callback(n, o, i);
-        },
-
-        /**
-         * name 地图名
-         **/
-        createBreadcrumb: function(name) {
-          let breadcrumb = {
-            type: "group",
-            id: name,
-            left: pos.leftCur + pos.leftPlus,
-            top: pos.top + 3,
-            children: [
-              {
-                type: "polyline",
-                left: -90,
-                top: -5,
-                shape: {
-                  points: line
-                },
-                style: {
-                  stroke: "#fff",
-                  key: name
-                  // lineWidth: 2,
-                },
-                onclick: function() {
-                  let name = this.style.key;
-                  handleEvents.resetOption(that.chinaMapChart, option, name);
-                }
-              },
-              {
-                type: "text",
-                left: -68,
-                top: "middle",
-                style: {
-                  text: name,
-                  textAlign: "center",
-                  fill: style.textColor,
-                  font: style.font
-                },
-                onclick: function() {
-                  let name = this.style.text;
-                  handleEvents.resetOption(that.chinaMapChart, option, name);
-                }
-              },
-              {
-                type: "text",
-                left: -68,
-                top: 10,
-                style: {
-                  name: name,
-                  text: cityToPinyin[name]
-                    ? cityToPinyin[name].toUpperCase()
-                    : "",
-                  textAlign: "center",
-                  fill: style.textColor,
-                  font: '12px "Microsoft YaHei", sans-serif'
-                },
-                onclick: function() {
-                  // console.log(this.style);
-                  let name = this.style.name;
-                  handleEvents.resetOption(that.chinaMapChart, option, name);
-                }
-              }
-            ]
-          };
-
-          pos.leftCur += pos.leftPlus;
-
-          return breadcrumb;
-        },
-
-        zoomAnimation: function() {
-          let count = null;
-          let zoom = function(per) {
-            if (!count) count = per;
-            count = count + per;
-            that.chinaMapChart.setOption({
-              geo: {
-                zoom: count
-              }
-            });
-            if (count < 1)
-              window.requestAnimationFrame(function() {
-                zoom(0.2);
-              });
-          };
-          window.requestAnimationFrame(function() {
-            zoom(0.2);
-          });
-        }
-      };
-      let option = {
-        backgroundColor: opt.bgColor,
-        tooltip: {
-          show: true,
-          trigger: "item",
-          alwaysShowContent: false,
-          backgroundColor: "rgba(50,50,50,0.7)",
-          hideDelay: 100,
-          triggerOn: "mousemove",
-          enterable: true,
-          // position:['60%','70%'],
-          formatter(params, ticket, callback) {
-            return (
-              "报警时间:" +
-              params.data.createTime +
-              "<br/>" +
-              "地点:" +
-              params.data.city
-            );
-          }
-        },
-        graphic: [
-          {
-            type: "group",
-            left: pos.left,
-            top: pos.top - 4,
-            children: [
-              {
-                type: "line",
-                left: 0,
-                top: -20,
-                shape: {
-                  x1: 0,
-                  y1: 0,
-                  x2: 60,
-                  y2: 0
-                },
-                style: {
-                  stroke: style.lineColor
-                }
-              },
-              {
-                type: "line",
-                left: 0,
-                top: 20,
-                shape: {
-                  x1: 0,
-                  y1: 0,
-                  x2: 60,
-                  y2: 0
-                },
-                style: {
-                  stroke: style.lineColor
-                }
-              }
-            ]
-          },
-          {
-            id: name[idx],
-            type: "group",
-            left: pos.left + 2,
-            top: pos.top,
-            children: [
-              {
-                type: "polyline",
-                left: 90,
-                top: -12,
-                shape: {
-                  points: line
-                },
-                style: {
-                  stroke: "transparent",
-                  key: name[0]
-                },
-                onclick: function() {
-                  let name = this.style.key;
-                  handleEvents.resetOption(that.chinaMapChart, option, name);
-                }
-              },
-              {
-                type: "text",
-                left: 0,
-                top: "middle",
-                style: {
-                  text: "中国",
-                  textAlign: "center",
-                  fill: style.textColor,
-                  font: style.font
-                },
-                onclick: function() {
-                  handleEvents.resetOption(that.chinaMapChart, option, "中国");
-                }
-              },
-              {
-                type: "text",
-                left: 0,
-                top: 10,
-                style: {
-                  text: "China",
-                  textAlign: "center",
-                  fill: style.textColor,
-                  font: '12px "Microsoft YaHei", sans-serif'
-                },
-                onclick: function() {
-                  handleEvents.resetOption(that.chinaMapChart, option, "中国");
-                }
-              }
-            ]
-          }
-        ],
-        geo: {
-          map: opt.mapName,
-          roam: true,
-          zoom: 1.2,
-          label: {
-            normal: {
-              show: true,
-              textStyle: {
-                color: "#fff"
-              }
-            },
-            emphasis: {
-              textStyle: {
-                color: "#fff"
-              }
-            }
-          },
-          itemStyle: {
-            normal: {
-              borderColor: "rgba(147, 235, 248, 1)",
-              borderWidth: 1,
-              areaColor: {
-                type: "radial",
-                x: 0.5,
-                y: 0.5,
-                r: 0.8,
-                colorStops: [
-                  {
-                    offset: 0,
-                    color: "rgba(147, 235, 248, 0)" // 0% 处的颜色
-                  },
-                  {
-                    offset: 1,
-                    color: "rgba(147, 235, 248, .2)" // 100% 处的颜色
-                  }
-                ],
-                globalCoord: false // 缺省为 false
-              },
-              shadowColor: "rgba(128, 217, 248, 1)",
-              shadowOffsetX: -2,
-              shadowOffsetY: 2,
-              shadowBlur: 10
-            },
-            emphasis: {
-              areaColor: "#389BB7",
-              borderWidth: 0
-            }
-          },
-          regions: opt.activeArea.map(function(item) {
-            if (typeof item !== "string") {
-              return {
-                name: item.name,
-                itemStyle: {
-                  normal: {
-                    areaColor: item.areaColor || "#389BB7"
-                  }
-                },
-                label: {
-                  normal: {
-                    show: item.showLabel,
-                    textStyle: {
-                      color: "#fff"
-                    }
-                  }
-                }
-              };
-            } else {
-              return {
-                name: item,
-                itemStyle: {
-                  normal: {
-                    borderColor: "red",
-                    areaColor: "#389BB7"
-                  }
-                }
-              };
-            }
-          })
-        },
-        series: [
-          {
-            type: "effectScatter",
-            coordinateSystem: "geo",
-            rippleEffect: {
-              brushType: "stroke"
-            },
-            symbolSize: {
-              brushType: "stroke",
-              scale: 0
-            },
-            borderWidth: 0,
-            showEffectOn: "emphasis",
-            hoverAnimation: false,
-            symbolSize: 40,
-            data: this.initSeriesData(opt.data)
-          }
-        ]
-      };
-
-      that.chinaMapChart.setOption(option);
-      // 添加事件
-      that.chinaMapChart.on("click", function(params) {
-        let _self = this;
-        if (opt.goDown && params.name !== name[idx]) {
-          if (cityMap[params.name]) {
-            let url = cityMap[params.name];
-            $.get(url, function(response) {
-              //console.log(response);
-              curGeoJson = response;
-              echarts.registerMap(params.name, response);
-              handleEvents.resetOption(_self, option, params.name);
-            });
-          }
-        }
-      });
-
-      that.chinaMapChart.setMap = function(mapName) {
-        let _self = this;
-        if (mapName.indexOf("市") < 0) mapName = mapName + "市";
-        let citySource = cityMap[mapName];
-        if (citySource) {
-          let url = "./map/" + citySource + ".json";
-          $.get(url, function(response) {
-            // console.log(response);
-            curGeoJson = response;
-            echarts.registerMap(mapName, response);
-            handleEvents.resetOption(_self, option, mapName);
-          });
-        }
-      };
-      return that.chinaMapChart;
-    },
-    // 执勤值班
-    renerWaringInfo() {
-      this.dutyChart = echarts.init(document.getElementById("prepareDuty"));
-      var category = [
-        "保障助理",
-        "政工助理",
-        "宣传助理",
-        "通信助理",
-        "作战助理",
-        "指挥长",
-        "值班领导"
-      ];
-      // var barData = [0, ~~(Math.random() * 100), ~~(Math.random() * 100), ~~(Math.random() * 100), ~~(Math.random() * 100)];
-      var barData = [100, 200, 300, 400, 500, 700, 800];
-      var lineData = [1500, 1500, 1500, 1500, 1500, 1500, 1500];
-      // barData处理形式
-
-      let option = {
-        color: ["#43d3ff"],
-        grid: {
-          top: "4%",
-          left: "3%",
-          right: "20%",
-          bottom: "4%",
-          containLabel: true
-        },
-        xAxis: {
-          type: "value",
-          show: false,
-          boundaryGap: [0, 0.01]
-        },
-        yAxis: {
-          type: "category",
-          // y轴的字体样式
-          axisLabel: {
-            show: true,
-            textStyle: {
-              color: "#03b0d8",
-              fontSize: "16px"
-            }
-          },
-          axisLine: {
-            show: false
-          },
-          data: category
-        },
-        series: [
-          // 底层
-          {
-            name: "",
-            type: "pictorialBar",
-            data: lineData,
-            symbol: "rect",
-            symbolOffset: [0, -2],
-            symbolMargin: 0.5,
-            itemStyle: {
-              normal: {
-                color: "transparent",
-                borderColor: "#02eeff",
-                borderWidth: "0.5",
-                borderType: "solid"
-              }
-            },
-
-            z: -11,
-            symbolRepeat: "fixed",
-            symbolSize: [8, 12],
-
-            animationEasing: "elasticOut",
-            animationDelay: function(dataIndex, params) {
-              return params.index * 30;
-            }
-          },
-          // 覆盖层
-          {
-            type: "pictorialBar",
-            data: barData,
-            // 设置子项的形状及样式
-            symbol: "rect",
-            barWidth: "10px",
-
-            symbolSize: [8, 12],
-            symbolRepeat: true,
-            symbolMargin: 0.5,
-
-            // 标签值
-            label: {
-              normal: {
-                show: true,
-                color: "#65f2ea",
-                position: "left",
-                offset: [250, 3],
-                color: "#65f2ea",
-                fontSize: 18
-              }
-            },
-            // 设置横条的样式
-            itemStyle: {
-              normal: {
-                barBorderRadius: 5,
-                borderWidth: "0.5",
-                borderColor: "#000",
-                color: new echarts.graphic.LinearGradient(
-                  0,
-                  0,
-                  1,
-                  0,
-                  [
-                    {
-                      offset: 0,
-                      color: "#32cfbe"
-                    },
-                    {
-                      offset: 0.8,
-                      color: "#00ff58"
-                    }
-                  ],
-                  false
-                )
-              }
-            }
-          }
-        ]
-      };
-      this.dutyChart.setOption(option);
-    },
-
-    // 重点单位
-    renderKeyUnit() {
-      this.keyUnitName.forEach(item => {
-        item.max = 15;
-      });
-      this.keyUnitChart = echarts.init(document.getElementById("keyUnit"));
-      let option = {
-        title: {},
-        tooltip: {},
-        radar: {
-          name: {
-            textStyle: {
-              color: "#fff",
-              borderRadius: 3,
-              padding: [3, 5]
-            }
-          },
-          center: ["50%", "65%"],
-          radius: "80%",
-          indicator: this.keyUnitName
-        },
-        series: [
-          {
-            name: "",
-            top: "center",
-            type: "radar",
-            areaStyle: {
-              normal: {
-                color: "#3ddbec",
-                opacity: 0.5
-              }
-            },
-            lineStyle: {
-              normal: {
-                color: "#cbe7e8"
-              }
-            },
-            itemStyle: { normal: { areaStyle: { type: "default" } } },
-            data: [
-              {
-                value: this.keyUnitValue,
-                name: "重点单位"
-              }
-            ]
-          }
-        ]
-      };
-      this.keyUnitChart.setOption(option);
-    },
-    // 火灾原因
-    fireReson() {
-      this.fireResonChart = echarts.init(document.getElementById("fireReson"));
-
-      let option = {
-        tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        series: [
-          {
-            name: "",
-            type: "pie",
-            radius: [80, 83],
-            center: ["55%", "50%"],
-            hoverAnimation: false,
-            labelLine: {
-              normal: {
-                show: false
-              }
-            },
-            data: [
-              {
-                value: 0,
-                name: "",
-                itemStyle: {
-                  normal: {
-                    color: "#03FEC9"
-                  }
-                }
-              }
-            ]
-          },
-          {
-            name: "火灾原因",
-            type: "pie",
-            radius: [60, 72],
-            center: ["55%", "50%"],
-            hoverAnimation: false,
-            avoidLabelOverlap: false,
-            label: {
-              normal: {
-                show: true,
-                formatter: "{b|{b}}  {per|{d}%}",
-                color: "#fff",
-                rich: {
-                  b: {
-                    color: "#fff",
-                    fontSize: 14,
-                    align: "center"
-                  },
-                  d: {
-                    color: "#11d1b4",
-                    fontSize: 14,
-                    align: "center"
-                  }
-                }
-              }
-            },
-            labelLine: {
-              normal: {
-                show: true,
-                length: 10
-              }
-            },
-            data: [
-              {
-                value: this.todayData.playfire,
-                name: "玩火",
-                itemStyle: {
-                  normal: {
-                    color: "#25b6bf"
-                  }
-                }
-              },
-              {
-                value: this.todayData.breakrules,
-                name: "违反常规",
-                itemStyle: {
-                  normal: {
-                    color: "#00ffff"
-                  }
-                }
-              },
-              {
-                value: this.todayData.smoke,
-                name: "吸烟",
-                itemStyle: {
-                  normal: {
-                    color: "#00a1fd"
-                  }
-                }
-              },
-              {
-                value: this.todayData.arson,
-                name: "纵火",
-                itemStyle: {
-                  normal: {
-                    color: "#6d21f9"
-                  }
-                }
-              },
-              {
-                value: this.todayData.electrical,
-                name: "电器",
-                itemStyle: {
-                  normal: {
-                    color: "#a6f7fc"
-                  }
-                }
-              },
-              {
-                value: this.todayData.careless,
-                name: "用火不慎",
-                itemStyle: {
-                  normal: {
-                    color: "#4e00ff"
-                  }
-                }
-              }
-            ]
-          },
-          {
-            name: "",
-            type: "pie",
-            radius: [50, 53],
-            center: ["55%", "50%"],
-            hoverAnimation: false,
-            labelLine: {
-              normal: {
-                show: false
-              }
-            },
-            data: [
-              {
-                value: 0,
-                name: "",
-                itemStyle: {
-                  normal: {
-                    color: "#03FEC9"
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      };
-
-      this.fireResonChart.setOption(option);
-    },
-    connectData() {
+		connectData() {
       let _this = this;
       let client, destination;
       let url = "ws://192.168.1.22:61614";
@@ -1200,10 +498,12 @@ export default {
       return this.$route.path;
     }
   },
-  components: {
-    VueCircle,
-    vueSeamless,
-    vuePie
+  components: { 
+    vuePie,
+    duty,
+    Agencies,
+    linechart,
+    earth
   }
 };
 </script>
@@ -1214,10 +514,7 @@ html,
 body {
   height: 100%;
 }
-#battleDutyIndex {
-  width: 1920px;
-  height: 890px;
-}
+
 .title_p {
   display: inline-block;
   width: 90%;
@@ -1240,8 +537,8 @@ body {
   }
 }
 #battleDutyIndex {
-  width: 1920px;
-  height: 100%;
+ width: 1920px;
+  height: 1080px;
   overflow: auto;
   background-image: url("./assets/background.png");
   background-repeat: no-repeat;
@@ -1290,12 +587,12 @@ body {
     overflow: hidden;
     .content-left {
       width: 20%;
+      height:100%;
+      min-width:367px;
       float: left;
-      height: 100%;
-      padding-right: 40px;
       & > div {
         &:nth-child(1) {
-          height: 50px;
+          min-height:80px;
           margin-bottom: 10px;
           .name_div {
             background: black;
@@ -1303,7 +600,7 @@ body {
         }
         &:nth-child(2) {
           // 需要更改
-          height: 80px;
+          min-height: 50x;
           margin-bottom: 20px;
           .link-port {
             width: 100%;
@@ -1329,11 +626,13 @@ body {
           }
         }
         &:nth-child(3) {
-          height: 40%;
+        	
+          min-height: 360px;
           margin-bottom: 20px;
         }
         &:nth-child(4) {
-          height: 33%;
+        	
+          min-height: 360px;
         }
       }
       .title {
@@ -1361,7 +660,7 @@ body {
         }
       }
       #prepareDuty {
-        height: calc(100% - 65px);
+        height: 318px;
         overflow-y: auto;
 
         background-image: url("./assets/rect.png");
@@ -1377,8 +676,10 @@ body {
       }
       .circle-box {
         width: 100%;
-        height: 100%;
-
+        height: 318px;
+				 background-image: url("./assets/rect.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
         .circle-item {
           margin-right: 40px;
           float: left;
@@ -1401,6 +702,7 @@ body {
       height: 100%;
       float: left;
       padding-right: 40px;
+     	padding-left:40px;
       & > div {
         &:nth-child(1) {
           height: 65px;
@@ -1447,6 +749,26 @@ body {
         overflow-y: auto;
         overflow-x: hidden;
         background: #051f43;
+        display:flex;
+        flex-direction: column;
+        & > div{
+        	flex:1;
+        	text-align: center;
+        	padding-top:24px;        	
+        	.ps{
+        		
+        		font-size: 16px;
+        		color:#00ccff;
+        	}
+        	.numbers{
+        		
+        		font-size:36px;
+        		 background-image: -webkit-linear-gradient(bottom, #00ff54, #01f9fd);
+        		   
+					  -webkit-background-clip: text;
+  					-webkit-text-fill-color: transparent;
+        	}
+        }
       }
     }
     .content-right {
@@ -1477,6 +799,7 @@ body {
         }
         &:nth-child(2) {
           height: 40%;
+          min-height: 367px;
           margin-bottom: 20px;
           .title {
             margin-bottom: 0px;
@@ -1487,6 +810,7 @@ body {
         }
         &:nth-child(3) {
           height: 40%;
+          min-height: 367px;
         }
         .chart-box {
           height: calc(100% - 53px);
@@ -1497,6 +821,7 @@ body {
     }
     .under-pic {
       height: calc(100% - 65px);
+      height:318px;
       margin-top: 10px;
       background-image: url("./assets/rect.png");
       background-repeat: no-repeat;

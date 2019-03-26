@@ -1,0 +1,5 @@
+{
+  "baseUrl": "http://192.168.1.22:8888/ecp",
+  "QNRTCUrl":"https://192.168.1.22:8445/",
+  "rabbitMQUrl": "ws://192.168.1.22:61614/stomp"
+}

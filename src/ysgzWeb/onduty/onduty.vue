@@ -494,7 +494,6 @@ export default {
                 value: {}
               }
             ];
-
             if (data.length == 0) {
               this.tableData.tdData = oldData;
             } else {

@@ -267,10 +267,7 @@
     </div>
   </div>
 </template>
-
-<script src="https://unpkg.com/tween.js@16.3.4"></script>
 <script>
-import $ from "jquery";
 import moment from "moment";
 // 引入stomp,axios,until 工具包
 import Stomp from "stompjs";
@@ -408,13 +405,11 @@ export default {
         login = "admin",
         passcode = "admin",
         destination = "/topic/ysgz_fire_mhjy";
-
       client = Stomp.client(url);
       // this allows to display debug logs directly on the web page
       client.debug = function(val) {
         // console.log(val);
       };
-
       // the client is notified when it is connected to the server.
       client.connect(login, passcode, function(frame) {
         // client.debug("connected to Stomp");
@@ -470,13 +465,11 @@ export default {
         });
       });
     },
-
     // 初始化滚动条内容
-    firstNotic(options) {
+    firstNotic() {
       this.axios({
         method: "post",
-        url: "/org/fireNotice",
-        params: options
+        url: "/org/fireNotice"
       }).then(res => {
         if (res.status == 200) {
           var data = res.data.result;
@@ -489,11 +482,10 @@ export default {
       });
     },
     // 初始化总数
-    firstSan(options) {
+    firstSan() {
       this.axios({
         method: "get",
-        url: "/org/today",
-        params: options
+        url: "/org/today"
       }).then(res => {
         if (res.status == 200) {
           var data = res.data;
@@ -562,7 +554,6 @@ export default {
         });
       });
     },
-   
 
     // 防火监督年月日切换数值
     fireClick(params) {

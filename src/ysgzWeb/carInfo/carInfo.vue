@@ -400,13 +400,9 @@ body {
         margin-top: 20px;
         background: url(./assets/left_content.png) no-repeat center center;
         background-size: 100% 100%;
-        .el-select__caret {
-          color: #00ccff;
-        }
         .searchul {
           display: flex;
           flex-direction: column;
-
           li {
             width: 307px;
             height: 34px;
@@ -455,8 +451,8 @@ body {
             line-height: 34px;
             height: 34px;
           }
-          .el-select .el-input .el-select__caret {
-            color: #00ccff !important;
+          .el-select__caret {
+            color: #00ccff;
           }
           .searchli {
             background: url(./assets/1.png) no-repeat center center;
@@ -526,9 +522,6 @@ body {
           bottom: 12px;
           width: 1505px;
           height: 30px;
-          .el-select__caret {
-            color: #00ccff;
-          }
           .el-pagination .btn-prev,
           .el-pagination .btn-next {
             background: center center no-repeat;

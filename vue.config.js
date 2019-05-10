@@ -75,6 +75,11 @@ module.exports = {
             template: 'src/ysgzWeb/carSearch/carSearch.html',
             filename: 'carSearch.html'
         },
+        'carInfo': {
+            entry: 'src/ysgzWeb/carInfo/carInfo.js',
+            template: 'src/ysgzWeb/carInfo/carInfo.html',
+            filename: 'carInfo.html'
+        },
         // 三级页面 ——> 人员搜索
         'searchPerson': {
             entry: 'src/ysgzWeb/searchPerson/searchPerson.js',

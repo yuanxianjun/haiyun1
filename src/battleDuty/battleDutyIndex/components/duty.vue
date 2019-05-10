@@ -1,7 +1,5 @@
 <template>
-  <div id="duty" ref="domChart" style="width:100%;height:100%;">
-    
-  </div>
+  <div id="duty" ref="domChart" style="width:100%;height:100%;"></div>
 </template>
 
 <script>
@@ -12,33 +10,14 @@ export default {
     msg: String
   },
   data() {
-    return {
-      dutyData: [
-        {
-          name: "指挥长",
-          value: 10
-        },
-        {
-          name: "指挥员",
-          value: 10
-        },
-        {
-          name: "消防长",
-          value: 10
-        },
-        {
-          name: "消防员",
-          value: 10
-        }
-      ]
-    };
+    return {};
   },
   created() {},
   mounted() {
     this.renerWaringInfo();
   },
   methods: {
-  	    // 执勤值班
+    // 执勤值班
     renerWaringInfo() {
       let dom = this.$refs.domChart;
       this.dutyChart = echarts.init(dom);
@@ -51,6 +30,8 @@ export default {
         "指挥长",
         "值班领导"
       ];
+      var fillImg =
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALMAAAAMCAYAAAApiIxTAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkY2NzM2QkYwNEVFMTExRTk5QjY1RkI2RTZGN0Y3NTQwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkY2NzM2QkYxNEVFMTExRTk5QjY1RkI2RTZGN0Y3NTQwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RjY3MzZCRUU0RUUxMTFFOTlCNjVGQjZFNkY3Rjc1NDAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RjY3MzZCRUY0RUUxMTFFOTlCNjVGQjZFNkY3Rjc1NDAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6xbnPnAAAAnElEQVR42uzSSwqDMBhF4fwh8YFTofvo/ukWuhMpisZqTesKcjuW802cXIIhx+7Px9cVvHKy81Pc3BqTm8ktctPX+py2neUmhF1uqrjJjfeH3BxB3yvmRm52v8pN7aKlT1e+ezXot4hvuTlZsq24mU2fM5ruZ8zLX/8z+bX8Xg64CGIGMQPEDBAzQMwgZoCYAWIGiBkgZlzJT4ABAE0kM3hb9XUtAAAAAElFTkSuQmCC";
       // var barData = [0, ~~(Math.random() * 100), ~~(Math.random() * 100), ~~(Math.random() * 100), ~~(Math.random() * 100)];
       var barData = [100, 200, 300, 400, 500, 700, 800];
       var lineData = [1500, 1500, 1500, 1500, 1500, 1500, 1500];
@@ -66,8 +47,7 @@ export default {
         },
         xAxis: {
           type: "value",
-          show: false,
-          boundaryGap: [0, 0.01]
+          show: false
         },
         yAxis: {
           type: "category",
@@ -76,7 +56,7 @@ export default {
             show: true,
             textStyle: {
               color: "#03b0d8",
-              fontSize: "16px"
+              fontSize: 16
             }
           },
           axisLine: {
@@ -91,8 +71,8 @@ export default {
             type: "pictorialBar",
             data: lineData,
             symbol: "rect",
-            symbolOffset: [0, -5],
-            symbolMargin: 0.5,
+            symbolOffset: [10, -2],
+            symbolMargin: 0.7,
             itemStyle: {
               normal: {
                 color: "transparent",
@@ -116,11 +96,13 @@ export default {
             type: "pictorialBar",
             data: barData,
             // 设置子项的形状及样式
-            symbol: "rect",
-            barWidth: "10px",
-            symbolSize: [8, 12],
-            symbolRepeat: true,
-            symbolMargin: 0.5,
+            symbolOffset: [10, -2],
+            symbol: "image://" + fillImg,
+            // barWidth: 12,
+            symbolClip: true,
+            symbolSize: ["90%", 12],
+            symbolBoundingData: 1500,
+            // symbolMargin: 0.5,
 
             // 标签值
             label: {
@@ -128,46 +110,25 @@ export default {
                 show: true,
                 color: "#65f2ea",
                 position: "left",
-                offset: [280, 3],
+                offset: [270, -2],
                 color: "#65f2ea",
+                fontFamily: "ROME",
                 fontSize: 18
-              }
-            },
-            // 设置横条的样式
-            itemStyle: {
-              normal: {
-                barBorderRadius: 5,
-                borderWidth: "0.5",
-                borderColor: "#000",
-                color: new echarts.graphic.LinearGradient(
-                  0,
-                  0,
-                  1,
-                  0,
-                  [
-                    {
-                      offset: 0,
-                      color: "#32cfbe"
-                    },
-                    {
-                      offset: 0.8,
-                      color: "#00ff58"
-                    }
-                  ],
-                  false
-                )
               }
             }
           }
         ]
       };
       this.dutyChart.setOption(option);
-    },
- 
+    }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import "../../../common/styles/font.css";
+#duty {
+  font-family: "ROME";
+}
 </style>

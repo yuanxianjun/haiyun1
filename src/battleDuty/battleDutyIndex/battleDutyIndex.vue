@@ -2,32 +2,50 @@
   <div id="battleDutyIndex">
     <div class="topHeader">
       <div class="logo">
-        <!-- <img src="./assets/logo.png" @click="goBack" alt> -->
+        <img src="./assets/logo_title.png">
+      </div>
+      <div class="big_title">
+        <img src="./assets/title_text.png" alt>
       </div>
       <div class="weather">
         <div class="sweater-box">
-          <p class="sweater">
-            <template
-              v-if="weather"
-            >{{weather.date.split('实时：')[1].split(")")[0]}} | {{weather.weather}} | {{weather.wind}}</template>
-            <template v-else>0℃ | 晴 | 无风</template>
-          </p>
-          <p class="time">{{curTime}}</p>
+          <span class="date">2019-03-21</span>
+          <span class="week">星期一</span>
+          <span class="time">{{curTime}}</span>
         </div>
       </div>
     </div>
-    <div class="content-wrapper" :gutter="20">
+    <div class="content-wrapper">
       <div class="content-left">
         <div>
-          <div class="name_div"></div>
+          <div class="name_div">
+            <div class="out_circle"></div>
+            <div class="name_con">
+              <span class="police_name">黄景瑜</span>
+              <span class="helleo">警官，您好</span>
+            </div>
+            <div class="out_btn" @click="showOutPage = true"></div>
+          </div>
         </div>
         <div>
           <div class="link-port">
-            <div>
-              <img src="./assets/use.png" alt>
+            <div @click="showUse = !showUse">
+              <img
+                v-show="showUse"
+                src="./assets/use.png"
+                style="width:100px;height:40px;margin-top:20px;"
+                alt
+              >
+              <img v-show="!showUse" src="./assets/use2.png" alt>
             </div>
-            <div>
-              <img src="./assets/systom.png" alt>
+            <div @click="showSystom = !showSystom">
+              <img
+                v-show="showSystom"
+                src="./assets/systom.png"
+                style="width:100px;height:40px;margin-top:20px;"
+                alt
+              >
+              <img v-show="!showSystom" src="./assets/systom2.png" alt>
             </div>
           </div>
         </div>
@@ -39,7 +57,7 @@
             </a>
           </div>
           <div id="prepareDuty">
-						<duty></duty>          	
+            <duty></duty>
           </div>
         </div>
         <div>
@@ -50,19 +68,23 @@
             </a>
           </div>
 
-       
-            <div class="circle-box">
-              <vuePie></vuePie>
-            </div>
-          
+          <div class="circle-box">
+            <vuePie></vuePie>
+          </div>
         </div>
       </div>
       <div class="content-middle">
         <div class="today-info">
-          <p class="titleInfo">
+          <div class="titleInfo">
             <span class="bell"></span>
-            节假日期间旅游景点和博物馆、文物建筑、要注意了解安全出口和疏散通道
-          </p>
+
+            <div id="div1">
+              <div id="div2">
+                <span class="con_text">节假日期间旅游景点和博物馆、文物建筑、要注意了解安全出口和疏散通道</span>
+              </div>
+              <div id="div3"></div>
+            </div>
+          </div>
         </div>
 
         <div class="chart-wrapper">
@@ -70,84 +92,108 @@
         </div>
 
         <div class="table-wrapper">
+          <div class="table-header">
+            <p class="title_p">防火监督</p>
+            <a class="click_btn" href="#">
+              <img src="./assets/into.png" alt>
+            </a>
+          </div>
           <div class="table-content">
-          	<div>
-          		<el-row >
-						  <el-col :span="6"><div class="grid-content bg-purple"><p class="ps">
-						  		发现火灾违法行为
-						  	</p>
-						  	<p class="numbers">
-						  		2,455
-						  	</p></div></el-col>
-						 
-						  <el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
-						  		下发行政处罚决定书
-						  	</p>
-						  	<p class="numbers">
-						  		2,455
-						  	</p></div></el-col>
-						  	<el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
-						  		下发行政处罚决定书
-						  	</p>
-						  	<p class="numbers">
-						  		2,455
-						  	</p></div></el-col>
-						  	 <el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
-						  		检查单位数
-						  	</p>
-						  	<p class="numbers">
-						  		2,455
-						  	</p></div></el-col>
-						  	 <el-col :span="3"><div class="grid-content bg-purple"><p class="ps">
-						  		拘留
-						  	</p>
-						  	<p class="numbers">
-						  	45
-						  	</p></div></el-col>
-						</el-row>
-          	</div>
-          	<div>
-      
-          		<el-row >
-						  <el-col :span="6"><div class="grid-content bg-purple"><p class="ps">
-						  		发现火灾违法行为
-						  	</p>
-						  	<p class="numbers">
-						  		2,455
-						  	</p></div></el-col>
-						 
-						  <el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
-						  		下发行政处罚决定书
-						  	</p>
-						  	<p class="numbers">
-						  		2,455
-						  	</p></div></el-col>
-						  	<el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
-						  		下发行政处罚决定书
-						  	</p>
-						  	<p class="numbers">
-						  		2,455
-						  	</p></div></el-col>
-						  	 <el-col :span="5"><div class="grid-content bg-purple"><p class="ps">
-						  		检查单位数
-						  	</p>
-						  	<p class="numbers">
-						  		2,455
-						  	</p></div></el-col>
-						  	 <el-col :span="3"><div class="grid-content bg-purple"><p class="ps">
-						  		拘留
-						  	</p>
-						  	<p class="numbers">
-						  	45
-						  	</p></div></el-col>
-						</el-row>
-          	</div>
-            
+            <div class="ymd">
+              <img @click="fireClick('y')" class="ymd_img" :src="showfireY" alt>
+              <img @click="fireClick('m')" class="ymd_img" :src="showfireM" alt>
+              <img @click="fireClick('d')" class="ymd_img" :src="showfireD" alt>
+            </div>
+            <div class="list">
+              <el-row>
+                <el-col :span="6">
+                  <div class="grid-content bg-purple">
+                    <p class="ps">发现火灾违法行为</p>
+                    <p class="numbers">{{fireData[0]}}</p>
+                  </div>
+                </el-col>
+
+                <el-col :span="5">
+                  <div class="grid-content bg-purple">
+                    <p class="ps">下发行政处罚决定书</p>
+                    <p class="numbers">{{fireData[1]}}</p>
+                  </div>
+                </el-col>
+                <el-col :span="5">
+                  <div class="grid-content bg-purple">
+                    <p class="ps">下发行政处罚决定书</p>
+                    <p class="numbers">{{fireData[2]}}</p>
+                  </div>
+                </el-col>
+                <el-col :span="5">
+                  <div class="grid-content bg-purple">
+                    <p class="ps">检查单位数</p>
+                    <p class="numbers">{{fireData[3]}}</p>
+                  </div>
+                </el-col>
+                <el-col :span="3">
+                  <div class="grid-content bg-purple">
+                    <p class="ps">拘留</p>
+                    <p class="numbers">{{fireData[4]}}</p>
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
+            <div class="list">
+              <el-row>
+                <el-col :span="6">
+                  <div class="grid-content bg-purple">
+                    <p class="ps">发现火灾违法行为</p>
+                    <p class="numbers">{{fireData[0]}}</p>
+                  </div>
+                </el-col>
+
+                <el-col :span="5">
+                  <div class="grid-content bg-purple">
+                    <p class="ps">下发行政处罚决定书</p>
+                    <p class="numbers">{{fireData[1]}}</p>
+                  </div>
+                </el-col>
+                <el-col :span="5">
+                  <div class="grid-content bg-purple">
+                    <p class="ps">下发行政处罚决定书</p>
+                    <p class="numbers">{{fireData[2]}}</p>
+                  </div>
+                </el-col>
+                <el-col :span="5">
+                  <div class="grid-content bg-purple">
+                    <p class="ps">检查单位数</p>
+                    <p class="numbers">{{fireData[3]}}</p>
+                  </div>
+                </el-col>
+                <el-col :span="3">
+                  <div class="grid-content bg-purple">
+                    <p class="ps">拘留</p>
+                    <p class="numbers">{{fireData[4]}}</p>
+                  </div>
+                </el-col>
+              </el-row>
+            </div>
           </div>
         </div>
       </div>
       <div class="content-right">
-        <div></div>
+        <div>
+          <ul class="grid">
+            <li class="grid-li">
+              <div class="grid_value">78</div>
+              <div class="grid_key">当日三级以上火灾</div>
+            </li>
+            <li class="grid-li">
+              <div class="grid_value">150</div>
+              <div class="grid_key">抢险救援</div>
+            </li>
+            <li class="grid-li">
+              <div class="grid_value">950</div>
+              <div class="grid_key">当日亡人火灾</div>
+            </li>
+          </ul>
+        </div>
         <div>
           <div class="title">
             <p class="title_p">灭火救援</p>
@@ -155,10 +201,14 @@
               <img src="./assets/into.png" alt>
             </a>
           </div>
-          <div class="under-pic">
-          		<linechart></linechart>
+          <div class="under-pic helpDiv">
+            <div class="help_ymd" @click="helpClick()">
+              <img @click="helpClick('y')" :src="showhelpY" alt>
+              <img @click="helpClick('m')" :src="showhelpM" alt>
+              <img @click="helpClick('d')" :src="showhelpD" alt>
+            </div>
+            <linechart :propsData="propsData" ref="line"></linechart>
           </div>
-          
         </div>
         <div>
           <div class="title">
@@ -168,7 +218,23 @@
             </a>
           </div>
           <div class="under-pic">
-          	<Agencies></Agencies>
+            <Agencies></Agencies>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="outPage" v-if="showOutPage">
+      <div class="centerDiv">
+        <div class="headImg">
+          <img class="head_img" src="./assets/outHead.png" alt>
+        </div>
+        <div class="loginName">黄鲸鱼</div>
+        <div class="btns">
+          <div class="confirm" @click="outConfirm">
+            <img src="./assets/modal_3.png" alt>
+          </div>
+          <div class="cancel" @click="outCancel">
+            <img src="./assets/modal_4.png" alt>
           </div>
         </div>
       </div>
@@ -177,99 +243,83 @@
 </template>
 
 <script>
-
 import echarts from "echarts";
 import Stomp from "stompjs";
 
 import $ from "jquery";
 import { imgUrl } from "./assets/img/img";
 import { setTimeout, clearTimeout } from "timers";
+
 // 引入pie组件
 import vuePie from "./components/pie.vue";
 // 引入执勤值班组件
 import duty from "./components/duty.vue";
 // 引入机构运行组件
-import Agencies from './components/funal.vue'
-// 引入机构运行组件
-import linechart from './components/lineChart.vue'
+import Agencies from "./components/funal.vue";
+// 引入灭火救援组件
+import linechart from "./components/lineChart.vue";
 // 引入地球
-import earth from "./components/earthBall.vue"
+import earth from "./components/earthBall.vue";
+
+// 导入图片 y-->year  m-->month d-->day
+import c_y from "./assets/click-year.png";
+import y from "./assets/year.png";
+import c_m from "./assets/click-month.png";
+import m from "./assets/month.png";
+import c_d from "./assets/click-day.png";
+import d from "./assets/day.png";
 
 export default {
   name: "battleDutyIndex",
   data() {
     return {
+      // 应用通报 和 系统维护
+      showUse: true,
+      showSystom: true,
+
+      // 底部年月日的切换
+      showfireY: y,
+      showfireM: c_m,
+      showfireD: d,
+      showhelpY: c_y,
+      showhelpM: m,
+      showhelpD: d,
+      propsData: "m",
+
+      // 展示和关闭确认退出页面
+      showOutPage: false,
+
       dialogTableVisible: false,
       dialogContent: "",
-      dialogTitle: "",
 
       todayData: {},
       keyUnitName: [],
       keyUnitValue: [],
       coordinates: [],
-     
+
       prepareList: [],
       weather: null,
       curTime: "",
-      currCityName: "",
-      
+
       keyUnitChart: null,
       fireResonChart: null,
       chinaMapChart: null,
-      isShowDialog: false,
+
       timeStamp: "",
       baseUrl: this.axios.defaults.baseURL.split("/ecp")[0],
       QNRTCUrl: localStorage.getItem("QNRTCUrl"),
       fill: { gradient: ["red", "green", "blue"] },
-      tableMiddle: [
-      {
-      	name:"发现火灾违法行为",
-      	value:"2,455"
+      tableMiddle: {
+        y: [5678, 4343, 2324, 7227, 3435, 100],
+        m: [2678, 23543, 2324, 2227, 2435, 500],
+        d: [1678, 13543, 1424, 1227, 1435, 100]
       },
-      {
-      	name:"下发行政处罚决定书",
-      	value:"2,455"
-      },
-      {
-      	name:"下发行政强制决定书",
-      	value:"2,455"
-      },
-      {
-      	name:"检查单位数",
-      	value:"2,455"
-      },
-      {
-      	name:"拘留",
-      	value:"45"
-      },
-      ], // 消防实力排序
+      fireData: [5678, 4343, 2324, 7227, 3435, 100],
+      // 消防实力排序
       temp: []
-     
-     	
     };
   },
   created() {
-    // 值班要情
-    this.axios.get("/dutyShow/selectDutyPoint").then(res => {
-      const { status, data } = res;
-      const { result } = data;
-      // if (status == 200 && result.length) this.newsList = result;
-    });
-    // 备情值班
-    this.axios.get("/dutyShow/selectDutyPerson").then(res => {
-      const { status, data } = res;
-      const { result } = data;
-      if (status == 200 && result.length) this.prepareList = result;
-    });
-   
-    // 今日车辆等数据
-    this.axios.get("/dutyShow/selectEmergencyCount").then(res => {
-      const { status, data } = res;
-      const { result } = data;
-      if (status == 200 && result) this.todayData = result;
-      this.renerWaringInfo();
-      this.fireReson();
-    });
     // 重点单位
     this.axios.get("/dutyShow/selectImportant").then(res => {
       const { status, data } = res;
@@ -294,21 +344,94 @@ export default {
       }
     });
     this.connectData();
-    this.getCurrentCity();
+
     this.getCurrTime();
   },
   mounted() {
     var _this = this;
     setTimeout(function() {}, 2000);
-
     window.addEventListener("resize", () => {
       this.keyUnitChart.resize();
       this.fireResonChart.resize();
       this.chinaMapChart.resize();
     });
+    // 调用横幅滚动条
+    this.scrollText();
   },
   methods: {
-    // 点击查看值班要情
+    // 公告滚动效果
+    scrollText() {
+      var s, s2, s3, timer;
+      function getid(id) {
+        return document.getElementById(id);
+      }
+      s = getid("div1");
+      s2 = getid("div2");
+      s3 = getid("div3");
+      s3.innerHTML = s2.innerHTML;
+      timer = setInterval(mar, 100);
+      function mar() {
+        if (s2.offsetWidth <= s.scrollLeft) {
+          s.scrollLeft -= s2.offsetWidth;
+        } else {
+          s.scrollLeft += 5;
+        }
+      }
+    },
+    // 退出按钮方法
+    outConfirm() {
+      this.showOutPage = false;
+    },
+    outCancel() {
+      this.showOutPage = false;
+    },
+    // 防火监督年月日切换数值
+    fireClick(params) {
+      // params 代表传入的年或月或者日
+      if (params == "y") {
+        this.showfireY = c_y;
+        this.showfireM = m;
+        this.showfireD = d;
+
+        this.fireData = this.tableMiddle.y;
+      } else if (params == "m") {
+        this.showfireM = c_m;
+        this.showfireY = y;
+        this.showfireD = d;
+
+        this.fireData = this.tableMiddle.m;
+      } else if (params == "d") {
+        this.showfireD = c_d;
+        this.showfireY = y;
+        this.showfireM = m;
+
+        this.fireData = this.tableMiddle.d;
+      }
+    },
+    // 灭火救援的年月日切换
+    helpClick(params) {
+      // params 代表传入的年或月或者日
+      if (params == "y") {
+        this.showhelpY = c_y;
+        this.showhelpM = m;
+        this.showhelpD = d;
+        this.propsData = this.xDataY;
+        this.$refs.line.checkxData("y");
+      } else if (params == "m") {
+        this.showhelpM = c_m;
+        this.showhelpY = y;
+        this.showhelpD = d;
+        this.propsData = this.xDataM;
+        this.$refs.line.checkxData("m");
+      } else if (params == "d") {
+        this.showhelpD = c_d;
+        this.showhelpY = y;
+        this.showhelpM = m;
+        this.propsData = "d";
+        this.$refs.line.checkxData("d");
+      }
+    },
+    // 点击跳转到执勤值班的页面
     clickContent(e) {
       console.log(e.target.innerText, "content");
       // this.dialogContent = e.target.innerText;
@@ -327,8 +450,7 @@ export default {
         this.baseUrl
       }/EMDY/dynamic.html?emergencyId=${id}`;
     },
-
-		connectData() {
+    connectData() {
       let _this = this;
       let client, destination;
       let url = "ws://192.168.1.22:61614";
@@ -383,42 +505,7 @@ export default {
         });
       });
     },
-    getCurrentCity() {
-      //定义获取城市方法
-      const geolocation = new BMap.Geolocation();
-      let _this = this;
-      geolocation.getCurrentPosition(
-        function getinfo(position) {
-          let city = position.address.city; //获取城市信息
-          _this.getWeather(city);
-          setInterval(function() {
-            _this.getWeather(city);
-          }, 1000 * 60 * 10);
-        },
-        function(e) {
-          console.log("定位失败！");
-        },
-        { provider: "baidu" }
-      );
-    },
-    // 获取今天的天气信息
-    getWeather(cityName) {
-      this.$jsonp("http://api.map.baidu.com/telematics/v3/weather", {
-        location: cityName, // 城市
-        output: "json", // 格式
-        ak: "eklfHV01LdEBLSrwUAXZRP6Ctr94f8TO" // 百度地图ak
-      }).then(res => {
-        if (res.status == "success") {
-          this.weather = res.results[0].weather_data[0];
-          console.log(
-            "this.weather",
-            this.weather.date.split("实时：")[1].split(")")[0]
-          );
-        } else {
-          this.$message.error("获取天气失败!");
-        }
-      });
-    },
+
     // 获取时间
     getCurrTime() {
       let _this = this;
@@ -436,53 +523,9 @@ export default {
           time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
         sec =
           time.getSeconds() < 10 ? "0" + time.getSeconds() : time.getSeconds();
-        let timeStr =
-          year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
+        let timeStr = hour + ":" + min;
         _this.curTime = timeStr;
       }, 1000);
-    },
-    videoTalk({ personId }) {
-      this.timeStamp = new Date().getTime();
-      var senderName = "管理员";
-      var alias = new Array(personId);
-      this.axios({
-        method: "post",
-        url: `/app/video?senderName=${senderName}&roomId=${
-          this.timeStamp
-        }&alias=${alias}`
-      }).then(res => {
-        if (res.data.code == "success") {
-          this.openWindow(this.timeStamp);
-        } else {
-          this.$message.error(res.data.msg);
-        }
-      });
-    },
-    //打开新窗口播放视频会议，并设置新框框的样式
-    openWindow(timeStamp) {
-      var url = `${this.QNRTCUrl}?room=${timeStamp}&username=admin`; //转向网页的地址;
-      var name = "视频会议";
-      var iWidth = 1500;
-      var iHeight = 900;
-      var iTop = (window.screen.availHeight - 30 - iHeight) / 2;
-      var iLeft = (window.screen.availWidth - 10 - iWidth) / 2;
-      window.open(
-        url,
-        name,
-        "height=" +
-          iHeight +
-          ",,innerHeight=" +
-          iHeight +
-          ",width=" +
-          iWidth +
-          ",innerWidth=" +
-          iWidth +
-          ",top=" +
-          iTop +
-          ",left=" +
-          iLeft +
-          ",toolbar=no,titlebar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no"
-      );
     },
     goBack() {
       window.history.back(1);
@@ -498,7 +541,7 @@ export default {
       return this.$route.path;
     }
   },
-  components: { 
+  components: {
     vuePie,
     duty,
     Agencies,
@@ -510,9 +553,11 @@ export default {
 
 
 <style lang="scss">
+@import "../../common/styles/font.css";
 html,
 body {
   height: 100%;
+  font-family: ROME;
 }
 
 .title_p {
@@ -527,7 +572,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 .click_btn {
-  display: inline-block;
+  float: right;
   width: 20px;
   height: 20px;
   img {
@@ -537,71 +582,152 @@ body {
   }
 }
 #battleDutyIndex {
- width: 1920px;
+  width: 1920px;
   height: 1080px;
   overflow: auto;
+  position: relative;
   background-image: url("./assets/background.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  // 退出的弹框
+  .outPage {
+    width: 1920px;
+    height: 1080px;
+    opacity: 60%;
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+
+    .centerDiv {
+      width: 456px;
+      height: 445px;
+      position: absolute;
+      left: 50%;
+      margin-left: -228px;
+      top: 30%;
+      background-image: url("./assets/modal1.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      .headImg {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto;
+        margin-top: 80px;
+        background-image: url("./assets/modal_2.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        text-align: center;
+        padding-top: 55px;
+        .header_img {
+          width: 80px;
+          height: 80px;
+        }
+        .btns {
+          width: 100%;
+          height: 80px;
+          .confirm {
+            width: 200px;
+            height: 80px;
+            float: left;
+          }
+        }
+      }
+      .loginName {
+        height: 50px;
+        text-align: center;
+        color: #0ff;
+        line-height: 40px;
+        font-size: 18px;
+        font-family: "ROME";
+      }
+      .btns {
+        width: 100%;
+        height: 80px;
+        & > div {
+          width: 200px;
+          height: 80px;
+          float: left;
+        }
+        .confirm {
+          text-align: right;
+        }
+
+        .cancel {
+          text-align: left;
+          margin-left: 50px;
+        }
+      }
+    }
+  }
   .topHeader {
-    height: 140px;
-    padding: 0 20px;
+    width: 100%;
+    height: 90px;
+    position: relative;
+    margin-bottom: 20px;
     overflow: hidden;
+    background: url("./assets/heaer_backgroung.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     .logo {
-      float: left;
       cursor: pointer;
-      margin: 8px 10px 0;
+      margin-top: 15px;
+      position: absolute;
+      left: 40px;
+    }
+    .big_title {
+      text-align: center;
+      img {
+        margin-top: 10px;
+      }
     }
     .weather {
-      float: right;
+      position: absolute;
+      right: 0;
+      top: 5px;
       text-align: right;
-      line-height: 76px;
+      line-height: 50px;
       span {
-        color: #fff;
+        color: #0ab7ff;
       }
       overflow: hidden;
       .sweater-box {
-        width: 200px;
+        color: #0ab7ff;
+        width: 300px;
         text-align: left;
         padding-left: 20px;
         float: right;
-        .sweater {
-          color: #bdfff0;
-          line-height: 26px;
-        }
-        .time {
-          color: #6dfff5;
-          line-height: 26px;
+        & > span {
+          width: 100px;
+          font-size: 16px;
+          margin-left: 20px;
         }
       }
     }
   }
   .content-wrapper {
+    width: 1920px;
+    height: 970px;
     color: #fff;
     padding: 0 40px 40px 40px;
-    width: 100%;
-    height: calc(100% - 84px);
-    overflow: hidden;
     .content-left {
       width: 20%;
-      height:100%;
-      min-width:367px;
+      height: 100%;
+      min-width: 367px;
       float: left;
       & > div {
         &:nth-child(1) {
-          min-height:80px;
+          min-height: 80px;
           margin-bottom: 10px;
-          .name_div {
-            background: black;
-          }
         }
         &:nth-child(2) {
           // 需要更改
           min-height: 50x;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
           .link-port {
             width: 100%;
             height: 100%;
@@ -613,9 +739,9 @@ body {
               height: 80px;
               text-align: center;
               img {
-                width: 100px;
-                height: 40px;
-                margin-top: 20px;
+                width: 100%;
+                height: 80px;
+                // margin-top: 20px;
               }
               :nth-child(1) {
               }
@@ -626,13 +752,52 @@ body {
           }
         }
         &:nth-child(3) {
-        	
           min-height: 360px;
           margin-bottom: 20px;
         }
         &:nth-child(4) {
-        	
           min-height: 360px;
+        }
+      }
+      /*登录名称*/
+      .name_div {
+        width: 100%;
+        height: 80px;
+        background: url("assets/sign.png") no-repeat center center;
+        /*background-size: auto 100%;*/
+        .out_circle {
+          width: 100px;
+          height: 100px;
+          position: absolute;
+          left: 30px;
+          top: 100px;
+          background: url(assets/logo_pie.png) no-repeat center center;
+          -webkit-background-size: cover;
+          background-size: cover;
+          -webkit-animation: myRotate 10s linear infinite;
+          animation: myRotate 10s linear infinite;
+        }
+        .name_con {
+          line-height: 80px;
+          margin-left: 110px;
+          .police_name {
+            color: #0ab7ff;
+            font-size: 18px;
+            margin-right: 10px;
+          }
+          .helleo {
+            font-size: 18px;
+            color: #fff;
+          }
+        }
+        .out_btn {
+          position: absolute;
+          left: 323px;
+          top: 136px;
+          width: 30px;
+          height: 30px;
+          background: url(assets/out.png) no-repeat center center;
+          cursor: pointer;
         }
       }
       .title {
@@ -662,24 +827,24 @@ body {
       #prepareDuty {
         height: 318px;
         overflow-y: auto;
-
         background-image: url("./assets/rect.png");
         background-repeat: no-repeat;
         background-size: 100% 100%;
         margin-top: 10px;
       }
       .under-pic {
-        height: calc(100% - 30px);
+        height: calc(100% - 40px);
+        min-height: 308px;
         background-image: url("./assets/rect.png");
         background-repeat: no-repeat;
         background-size: 100% 100%;
       }
       .circle-box {
         width: 100%;
-        height: 318px;
-				 background-image: url("./assets/rect.png");
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
+        height: 300px;
+        background-image: url("./assets/rect.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
         .circle-item {
           margin-right: 40px;
           float: left;
@@ -702,72 +867,129 @@ body {
       height: 100%;
       float: left;
       padding-right: 40px;
-     	padding-left:40px;
+      padding-left: 40px;
       & > div {
         &:nth-child(1) {
           height: 65px;
         }
         &:nth-child(2) {
-          height: calc(100% - 266px);
+          height: calc(100% - 315px);
           #myChart {
             width: 100%;
             height: 100%;
           }
         }
         &:nth-child(3) {
-          height: 200px;
+          height: 250px;
         }
       }
       .today-info {
         text-align: center;
-        background-image: url("./assets/rect.png");
+        background-image: url("./assets/gundong.png");
         background-repeat: no-repeat;
         background-size: 100% 100%;
-
         .titleInfo {
           height: 100%;
           color: red;
           line-height: 65px;
           font-size: 20px;
+
           .bell {
             float: left;
             width: 20px;
             height: 20px;
             margin-top: 23px;
-            margin-left: 20px;
+            margin-left: 40px;
             background-image: url("./assets/warning.png");
             background-repeat: no-repeat;
             background-size: 100% 100%;
+          }
+          #div1 {
+            width: 900px;
+            height: 65px;
+            margin-left: 100px;
+            overflow: hidden;
+            white-space: nowrap;
+            #div2 {
+              width: auto;
+              height: 65px;
+              display: inline-block;
+              line-height: 65px;
+              word-spacing: 10px;
+              span {
+                width: 800px;
+                height: 65px;
+                font-size: 24px;
+                color: #ff0f00;
+                margin-left: 500px;
+              }
+            }
+            #div3 {
+              width: auto;
+              height: 65px;
+              display: inline-block;
+              line-height: 65px;
+              text-align: center;
+              span {
+                width: 800px;
+                height: 65px;
+                font-size: 24px;
+                color: #ff0f00;
+                margin-left: 500px;
+              }
+            }
           }
         }
       }
       .table-wrapper {
         height: 180px;
       }
+      .table-header {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        background-image: url("./assets/topBorder.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        margin-bottom: 10px;
+      }
       .table-content {
-        height: calc(100%);
+        height: 200px;
         overflow-y: auto;
         overflow-x: hidden;
-        background: #051f43;
-        display:flex;
+        background-image: url("./assets/bottomBoder.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        display: flex;
         flex-direction: column;
-        & > div{
-        	flex:1;
-        	text-align: center;
-        	padding-top:24px;        	
-        	.ps{
-        		
-        		font-size: 16px;
-        		color:#00ccff;
-        	}
-        	.numbers{
-        		
-        		font-size:36px;
-        		 background-image: -webkit-linear-gradient(bottom, #00ff54, #01f9fd);
-        		   
-					  -webkit-background-clip: text;
-  					-webkit-text-fill-color: transparent;
-        	}
+        position: relative;
+        z-index: 999;
+        & > div {
+          text-align: center;
+          .list {
+            margin-top: 10px;
+          }
+          .ps {
+            font-size: 16px;
+            line-height: 30px;
+            color: #00ccff;
+          }
+          .numbers {
+            font-family: ROME;
+            font-size: 36px;
+            background-image: -webkit-linear-gradient(bottom, #00ff54, #01f9fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 50px;
+          }
+        }
+        .ymd {
+          height: 30px;
+
+          text-align: right;
+          .ymd_img {
+            margin-left: 2px;
+          }
         }
       }
     }
@@ -775,7 +997,6 @@ body {
       width: 20%;
       float: right;
       height: 100%;
-
       .title {
         color: #05dce5;
         width: 100%;
@@ -816,12 +1037,55 @@ body {
           height: calc(100% - 53px);
         }
       }
+      //灭火救救的年月日位置
+      .helpDiv {
+        position: relative;
+        .help_ymd {
+          position: absolute;
+          right: 0;
+          z-index: 200;
+          img {
+            margin-left: 5px;
+          }
+        }
+      }
 
+      .grid {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+      }
+      .grid-li {
+        flex: 1;
+        height: 100%;
+
+        .grid_key {
+          font-size: 14px;
+          color: #03b0d8;
+          margin-top: 5px;
+          text-align: center;
+        }
+        .grid_value {
+          height: 100px;
+          width: 100px;
+          font-family: ROME;
+          font-size: 46px;
+          color: #f2fb48;
+          line-height: 100px;
+          text-align: center;
+          background-image: url("./assets/group.png");
+          background-repeat: no-repeat;
+          background-size: 100%;
+          background-position-x: 2px;
+          margin: 0 auto;
+        }
+      }
       //border: 1px solid brown;
     }
     .under-pic {
       height: calc(100% - 65px);
-      height:318px;
+      height: 308px;
       margin-top: 10px;
       background-image: url("./assets/rect.png");
       background-repeat: no-repeat;
@@ -851,79 +1115,26 @@ body {
 }
 </style>
 <style>
-td img {
-  vertical-align: middle;
-}
-
-.el-dialog__title {
-  color: #00ffff !important;
-  font-size: 22px;
-}
-
-.el-dialog .el-dialog__body .closeBtn {
-  /* background: url(./assets/close.png) no-repeat 0 0; */
-  background-size: contain;
-  border: 0px;
-  width: 30px;
-  height: 30px;
-  padding: 0px;
-  float: right;
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  cursor: pointer;
-}
-.tab_show td {
-  animation: myanimate 1.5s infinite;
-  -webkit-animation: myanimate 1.5s infinite;
-}
-.tab_show {
-  animation: myanimate 1.5s infinite;
-  -webkit-animation: myanimate 1.5s infinite;
-}
-@keyframes myanimate {
+@-webkit-keyframes myRotate {
   0% {
-    color: white;
-    background: #7b0606;
-  }
-  25% {
-    color: #818186;
-    background: #041530;
+    -webkit-transform: rotate(0deg);
   }
   50% {
-    color: white;
-    background: #7b0606;
-  }
-  75% {
-    color: #818186;
-    background: #041530;
+    -webkit-transform: rotate(180deg);
   }
   100% {
-    color: white;
-    background: #7b0606;
+    -webkit-transform: rotate(360deg);
   }
 }
-
-@-webkit-keyframes myanimate /*Safari and Chrome*/ {
+@keyframes myRotate {
   0% {
-    color: white;
-    background: #7b0606;
-  }
-  25% {
-    color: #818186;
-    background: #041530;
+    -webkit-transform: rotate(0deg);
   }
   50% {
-    color: white;
-    background: #7b0606;
-  }
-  75% {
-    color: #818186;
-    background: #041530;
+    -webkit-transform: rotate(180deg);
   }
   100% {
-    color: white;
-    background: #7b0606;
+    -webkit-transform: rotate(360deg);
   }
 }
 </style>

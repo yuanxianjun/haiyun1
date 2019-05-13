@@ -457,7 +457,6 @@ export default {
           }
         ]
       };
-
       chart.setOption(option);
       // 添加事件
       var _this = this;
@@ -485,23 +484,18 @@ export default {
           _this.$emit("pushCityId", "52");
         }
       });
-
       chart.setMap = function(mapName) {
         var _self = this;
         if (mapName.indexOf("市") < 0) mapName = mapName + "市";
-
         var citySource = cityMap[mapName];
-
         if (citySource) {
           var url = "./map/" + citySource + ".json";
           curGeoJson = url;
           echarts.registerMap(mapName, url);
           handleEvents.resetOption(_self, option, mapName);
         }
-
         // handleEvents.resetOption(this, option, mapName);
       };
-
       return chart;
     }
   },

@@ -7,7 +7,6 @@
         <span class="littleHeng">-</span>
         <span class="color-grind">{{localPage}}</span>
       </template>
-
       <template v-else>
         <template v-for="(page,index) in localPage">
           <span class="littleHeng">-</span>

@@ -23,6 +23,8 @@ module.exports = {
                 { from: /^\/onduty/, to: '/onduty.html' },
                 //车辆搜索
                 { from: /^\/carSearch/, to: '/carSearch.html' },
+
+
                 // 机构运行
                 { from: /^\/operation/, to: '/operation.html' },
                 { from: /./, to: '/views/404.html' }
@@ -69,12 +71,13 @@ module.exports = {
             template: 'src/ysgzWeb/operation/operation.html',
             filename: 'operation.html'
         },
-        // 三级页面 ——> 执勤值班
+        // 三级页面 ——> 车辆搜索
         'carSearch': {
             entry: 'src/ysgzWeb/carSearch/carSearch.js',
             template: 'src/ysgzWeb/carSearch/carSearch.html',
             filename: 'carSearch.html'
         },
+        // 三级页面 ——> 车辆信息
         'carInfo': {
             entry: 'src/ysgzWeb/carInfo/carInfo.js',
             template: 'src/ysgzWeb/carInfo/carInfo.html',

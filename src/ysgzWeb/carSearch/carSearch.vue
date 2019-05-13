@@ -1,7 +1,7 @@
 	<template>
   <div id="carSearchDiv">
     <comHeader></comHeader>
-    <backHome :localPage="'车辆搜索'"></backHome>
+    <backHome :localPage="pageTitle"></backHome>
     <div class="carSearchCon">
       <div class="carSearch_left">
         <div class="left_header">
@@ -138,7 +138,6 @@
 	
 	<script>
 import echarts from "echarts";
-
 import { numbersSplit } from "../../tools/util.js";
 import { imgUrl } from "./assets/img/img";
 import { setTimeout, clearTimeout } from "timers";
@@ -150,6 +149,15 @@ export default {
   name: "ysgzIndex",
   data() {
     return {
+      pageTitle: [
+        {
+          link: "/personData",
+          name: "人员数据"
+        },{
+          link:"",
+          name:"车辆搜索"
+        }
+      ],
       dateTimeValue: "",
       options: [
         {

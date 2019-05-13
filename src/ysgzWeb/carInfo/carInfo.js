@@ -4,8 +4,13 @@ import duty from './carInfo.vue'
 import router from './router'
 import store from './store'
 import '@/common/styles/reset.css'
+
 import ElementUI from 'element-ui'
 import '@/common/styles/element-variables.scss'
+
+import '@/ysgzWeb/carInfo/assets/css/myStyle.scss'
+import '@/ysgzWeb/personInfo/assets/css/swiper.min.css'
+import '@/ysgzWeb/personInfo/assets/js/swiper.min.js'
 
 import VueJsonp from 'vue-jsonp'
 Vue.use(VueJsonp);

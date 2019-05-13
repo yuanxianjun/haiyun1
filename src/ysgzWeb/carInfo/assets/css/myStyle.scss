@@ -1,0 +1,329 @@
+@import "../../../../common/styles/font.css";
+html,
+body {
+    height: 100%;
+    font-family: yiwei;
+}
+.el-cascader-menu .el-popper {
+    border: none !important;
+}
+.el-cascader-menus {
+    border: none !important;
+    font-family: "微软雅黑";
+}
+.color_grind{
+        height:45px;
+        line-height: 45px;
+            background: linear-gradient(to bottom, #02f4fb, #0f84d4);
+            -webkit-background-clip: text;
+            color: transparent;
+          margin-left:20px;
+          font-size: 24px;
+}
+.main{
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    position: relative;
+    background: url("../../../../common/images/background.png") 0 0 no-repeat;
+    background-size: 100% 100%;
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    .info{
+        width:100%;
+        height:100%;
+        display:flex;
+        flex-direction: row;
+        padding:10px;
+        .middlWire{
+            width:2px;
+            margin-left:10px;
+            margin-right:10px;
+            height: 643px;
+            border-right:1px dotted #00ccff;
+        }
+        .leftUl{
+            flex:1;
+            .infoLi{
+                width:100%;
+                background:url(../li_bottom.png)no-repeat;
+                background-position: 0 35px;
+                background-size:100%;
+                display:flex;
+                flex-direction: row;
+                justify-content: space-between;
+                height:68px;
+                line-height: 68px;
+                span{
+                    font-size: 20px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    line-height: 29px;
+                    letter-spacing: 0px;
+                    color: #00ccff;
+                }
+            }
+        }
+    }
+    .content_top{
+        width:1920px;
+        height:765px;
+        padding: 0px 40px;
+        box-sizing: border-box;
+        display:flex;
+        flex-direction:row;
+        
+        .left{
+            width: 655px;
+            height: 703px;
+            .carImg{
+                width: 655px;
+                height: 643px;
+                background:url(../left_con.png)no-repeat center center;
+                background-size:100% 100%;
+                margin-top: 40px;
+                img{
+                    width: 627px;height: 420px;
+                    margin:14px;
+                }
+                .info{
+                    width:100%;
+                    height:184px;
+                    display:flex;
+                    flex-direction: row;
+                    padding:10px;
+                    .middlWire{
+                        width:2px;
+                        margin-left:10px;
+                        margin-right:10px;
+                        height:184px;
+                        border-right:1px dotted #00ccff;
+                    }
+                    .leftUl{
+                        flex:1;
+                        .infoLi{
+                            
+                            background:url(../li_bottom.png)no-repeat;
+                            background-position: 0 35px;
+                            display:flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            height:68px;
+                            line-height: 68px;
+                            span{
+                                font-size: 20px;
+                                font-weight: normal;
+                                font-stretch: normal;
+                                line-height: 29px;
+                                letter-spacing: 0px;
+                                color: #00ccff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // 更改tab标签的样式
+        .el-tabs--card > .el-tabs__header {
+            border:none;
+            // border-bottom: 1px solid #e4e7ed;
+        }
+        .el-tabs--card > .el-tabs__header .el-tabs__item {
+             border:none;
+             width:153px;
+             height:48px;
+            -webkit-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            background:url(../2.png)no-repeat center center ;
+            background-size: 100% 100%;
+          
+            color: #00ccff;
+            font-size:18px;
+            text-align:center; 
+             line-height: 34px;
+        }
+        .el-tabs--card > .el-tabs__header .el-tabs__item:last-child {
+            border:none;
+            width:153px;
+            height:48px;
+           -webkit-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+           transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+           background:url(../5.png)no-repeat center center ;
+           background-size: 100% 100%;
+         
+           color: #00ccff;
+           font-size:18px;
+           text-align:center; 
+            line-height: 34px;
+       }
+        .el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
+            border:none;
+            width:153px;
+            height:48px;
+            -webkit-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            background:url(../1.png)no-repeat center center ;
+            background-size: 100% 100%;
+            color: #fdb13f;
+            font-size:18px;
+            text-align: center;
+            line-height: 36px;
+        }
+        .el-tabs--card > .el-tabs__header .el-tabs__nav {
+            border:none;
+            border-radius: 4px 4px 0 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .el-tab-pane{
+            height:643px;
+            background:url(../bottom_con.png)no-repeat center bottom;
+            background-size:100% 100%;
+        }
+        .el-tabs__nav-prev{
+            display:none;
+        }
+        .el-tabs__nav-next{
+            display:none;
+        }
+        .el-tabs__nav-wrap.is-scrollable {
+           padding:0;
+        }
+        .middle{
+            width:776px;
+            
+            margin-left:40px;
+            margin-top:57px;
+        }
+        .right{
+            width: 331px;
+            height: 703px; 
+            margin-left:40px;
+                margin-top:65px;
+                // 更改时间线
+            .el-timeline-item__content{
+                color:#00ccff;
+                img{
+                    width:20px;
+                    height:20px;
+                }
+            }
+            .el-timeline-item__timestamp {
+                color: #ffffff;
+                line-height: 1;
+                font-size: 13px;
+            }
+            .right_header{
+                width: 330px;
+                height: 45px;
+                background: url(../title_62.png)no-repeat center center;
+                background-size: 100% 100%;
+            }
+            .right_con{
+                width: 330px;
+                height: 643px;
+                margin-top:10px;
+                padding:30px;
+                background: url(../right_con.png)no-repeat center center;
+                background-size: 100% 100%;
+            }
+        }
+    }
+    .bottom_content{
+        height: 165px;
+        margin-top:20px;
+        width:1920px;
+        padding:0 40px;
+        // background:yellow;
+        .bottom_header{
+            width:100%;
+            height:45px;
+            display:flex;
+            flex-direction: row;
+             .title{
+                width:330px;
+                height:45px;
+                background:url(../title.png)no-repeat left center;
+                line-height:45px;
+            }
+            .num{
+                flex:1;  
+                font-family: "ROME";
+                font-size: 20px;
+                font-weight: normal;
+                font-stretch: normal;
+                line-height: 22px;
+                letter-spacing: 2px;
+                color: #00fffb;
+            }
+            .year{
+                width: 57px;
+                height: 23px;
+                line-height:25px;
+                background:url(../year.png)no-repeat center center;
+                background-size:100% 100%;
+                font-size: 14px;
+                font-weight: normal;
+                letter-spacing: 0px;
+                color: #ffffff;
+                text-align: center;
+            }
+        }
+//滑动组件
+.swiper-container{
+    width: 1838px;
+    height: 101px;
+    .swiper-wrapper{
+        width: 1838px;
+        height:100%;
+        transition-duration: 0ms;
+        transform: translate3d(0px, 0px, 0px);
+        //margin:0 auto;
+        .swiper-slide {
+            //width:50px !important;
+            //height:50px;
+            width:321px !important;
+            height:101px;
+            text-align: center;
+            font-size: 18px;
+            // background: #fff;
+        }
+        
+    }
+}
+        ._swiper{
+            position: relative;
+            margin-top:5px;
+            .time{
+                height:18px;
+                text-align:center;
+                font-size: 16px;
+                font-weight: normal;
+                font-stretch: normal;
+                line-height: 18px;
+                letter-spacing: 2px;
+                color: #52a1ce;
+                
+            }
+            .address{
+                width:200px;
+                margin: 0 auto;
+                font-size: 18px;
+                color: #00ccff;
+                padding-top:7px;
+                padding-bottom:7px;
+            }
+            .driver{
+                font-size:18px;
+                color: #ffffff;
+            }
+           .con{
+                width: 300px;
+                height: 85px;
+                background:url(../rect.png) no-repeat center center;
+                background-size:100% 100%;
+            }
+        }
+    }
+}

@@ -49,7 +49,6 @@ export default {
         }
       }
       sumAll = eval(numList.join("+"));
-
       function splitBai(i) {
         return ((i / sumAll) * 100).toFixed(0) + "%";
       }
@@ -70,13 +69,11 @@ export default {
           // dataObject[3] = { value: 4, name: splitBai(val[i]) };
         }
       }
-
       let option = {
         tooltip: {
           show: false,
           trigger: "item"
         },
-
         legend: {
           show: false,
           textStyle: {

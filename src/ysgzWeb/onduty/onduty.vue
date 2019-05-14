@@ -437,68 +437,9 @@ export default {
         params: {}
       }).then(res => {
         if (res.status == 200) {
-          console.log(res.data.result == "[]");
           if (res.data.result) {
             var data = JSON.parse(res.data.result);
-            console.log(data, "值班详情数据");
-
-            var oldData = [
-              {
-                name: "总队机关",
-                value: {
-                  作战值班: "查爱平"
-                }
-              },
-              {
-                name: "贵阳",
-                value: {}
-              },
-              {
-                name: "遵义",
-                value: {}
-              },
-              {
-                name: "安顺",
-                value: {}
-              },
-              {
-                name: "黔南",
-                value: {}
-              },
-              {
-                name: "黔东南",
-                value: {}
-              },
-              {
-                name: "铜仁",
-                value: {}
-              },
-              {
-                name: "毕节",
-                value: {}
-              },
-              {
-                name: "六盘水",
-                value: {}
-              },
-              {
-                name: "黔东南",
-                value: {}
-              },
-              {
-                name: "贵安",
-                value: {}
-              },
-              {
-                name: "培训基地",
-                value: {}
-              }
-            ];
-            if (data.length == 0) {
-              this.tableData.tdData = oldData;
-            } else {
-              this.tableData.tdData = data;
-            }
+            this.tableData.tdData = data;
           }
         } else {
           console.log("请求错误");

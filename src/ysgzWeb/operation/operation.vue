@@ -56,6 +56,7 @@
         <div class="left3">
           <div class="leftTitle">
             <span class="color-grind">车辆信息</span>
+            <img class="intoPng" src="../../common/images/into.png" alt>
           </div>
           <div class="leftContent">
             <div id="carInfo">
@@ -68,9 +69,27 @@
         <div class="left4">
           <div class="leftTitle">
             <span class="color-grind">装备信息</span>
+            <img class="intoPng" @click="showMore" src="../../common/images/into.png" alt>
           </div>
           <div id="zhuangbei">
-            <vue-zhuang ref="zhuangbei"></vue-zhuang>
+            <ul class="equipUl">
+              <li
+                class="equipLi"
+                v-for="(item,index) in equiliData"
+                v-if="index<6"
+                :key="index+'eqli'"
+              >
+                <el-row :gutter="20">
+                  <el-col :span="10">
+                    <div class="grid-content num">{{item.num}}</div>
+                  </el-col>
+                  <el-col :span="14">
+                    <div class="grid-content text">{{item.name}}</div>
+                  </el-col>
+                </el-row>
+              </li>
+            </ul>
+            <!-- <vue-zhuang ref="zhuangbei"></vue-zhuang> -->
           </div>
         </div>
       </div>
@@ -442,6 +461,17 @@
         </div>
       </div>
     </div>
+    <div class="showMoreDiv" v-if="showMore_bool">
+      <div class="nei">
+        <el-table :data="equiliData" stripe height="585" style="width: 100%">
+          <el-table-column prop="name" label="装备名称"></el-table-column>
+          <el-table-column prop="num" label="数量"></el-table-column>
+        </el-table>
+      </div>
+      <div class="closeImg" @click="showMore_bool=false">
+        <img src="../../common/images/bubble_close.png" alt>
+      </div>
+    </div>
   </div>
 </template>
 	<script>
@@ -473,6 +503,30 @@ export default {
   name: "ysgzIndex",
   data() {
     return {
+      // 装备信息弹窗
+      showMore_bool: false,
+      tableData: [
+        {
+          date: "2016-05-02",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-04",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1517 弄"
+        },
+        {
+          date: "2016-05-01",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1519 弄"
+        },
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1516 弄"
+        }
+      ],
       // 实时在位信息
       realTimeReginData: {},
       // 备勤值班
@@ -624,7 +678,8 @@ export default {
       beiqinData: [],
       // 首长
       leadData: {},
-      isZhong: false
+      isZhong: false,
+      equiliData: []
     };
   },
   created() {
@@ -640,6 +695,8 @@ export default {
     this.peopleMember(this.operationId);
     // 实时警情获取
     this.realTimeFire_gd(this.operationId);
+    // 装备信息获取
+    this.zhuangbei_gd(this.operationId);
 
     if (this.isZhong) {
       // 作战力量
@@ -658,7 +715,28 @@ export default {
      * 中队   作战力量
      * 非中队 备勤值班
      */
-
+    // 展示更多装备信息
+    showMore() {
+      this.showMore_bool = true;
+      console.log(this.showMore_bool);
+    },
+    // 装备信息获取
+    zhuangbei_gd(id) {
+      this.axios({
+        method: "post",
+        url: "/org/equipmentInfo/" + id
+      }).then(res => {
+        if (res.status == 200) {
+          var data = [];
+          if (res.data.result) {
+            data = res.data.result;
+            this.equiliData = data;
+          }
+        } else {
+          console.log("请求错误");
+        }
+      });
+    },
     // 作战力量数据获取
     fightPowerData_gd(orgId) {
       this.axios({
@@ -739,7 +817,8 @@ export default {
           id: orgId,
           type: this.nowDayType
         });
-        this.$refs.zhuangbei.zhuangbei_gd(orgId);
+        // 装备信息获取
+        this.zhuangbei_gd(orgId);
       }
     },
     // 启用定时器
@@ -1104,7 +1183,93 @@ body {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  .intoPng {
+    float: right;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+  // 弹出框
+  .showMoreDiv {
+    width: 584px;
+    height: 650px;
+    position: relative;
+    top: -886px;
+    left: 200px;
+    background: url(../../common/images/modal.png) no-repeat center center;
+    background-size: 100% 100%;
+    z-index: 9999;
+    padding: 20px;
+    padding-bottom: 40px;
+    overflow: hidden;
+    .nei {
+      width: 550px;
+      height: 585px;
+      position: relative;
+      top: 20px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    // 更改表格样式
+    .el-table {
+      position: relative;
+      overflow: hidden;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      width: 100%;
+      max-width: 100%;
+      background: transparent !important;
+      font-size: 14px;
+      color: #fff;
+    }
+    // 更改tab标签的样式
+    .el-table--group::after,
+    .el-table--border::after,
+    .el-table::before {
+      content: "";
+      position: absolute;
+      background-color: transparent;
+      z-index: 1;
+    }
+    .el-table--enable-row-hover .el-table__body tr:hover > td {
+      opacity: 0.8;
+      background: transparent;
+    }
+    .el-table tr {
+      background-color: transparent;
+    }
 
+    .el-table th {
+      white-space: nowrap;
+      overflow: hidden;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-color: transparent;
+    }
+    .el-table th.is-leaf,
+    .el-table td {
+      border-bottom: none;
+    }
+    .el-table--striped .el-table__body tr.el-table__row--striped td {
+      background: rgba(70, 150, 187, 0.5);
+    }
+    .el-table thead {
+      color: #00ccff;
+      font-weight: 500;
+    }
+    .closeImg {
+      position: absolute;
+      right: 15px;
+      top: 20px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+  }
   .divTitle {
     font-size: 16px;
     /*字体渐变*/
@@ -1147,14 +1312,6 @@ body {
         float: left;
         background: url(./assets/content_bg434-207.png) no-repeat center center;
         background-size: 100% 100%;
-        // margin-top: 10px;
-        #zhuangbei {
-          width: 435px;
-          height: 195px;
-          background: url(./assets/content_bg434-207.png) no-repeat center
-            center;
-          background-size: 100% 100%;
-        }
       }
       .selectDiv {
         width: 435px;
@@ -1285,12 +1442,47 @@ body {
         height: 275px;
         margin-top: 18px;
         float: left;
+        // margin-top: 10px;
         #zhuangbei {
           width: 435px;
           height: 195px;
           background: url(./assets/content_bg434-207.png) no-repeat center
             center;
           background-size: 100% 100%;
+          .equipUl {
+            width: 435px;
+            height: 195px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            .el-col .el-col-12 {
+              padding-left: 0px;
+            }
+            .equipLi {
+              width: 204px;
+              height: 53px;
+              background: url(./assets/equipbg.png) no-repeat center center;
+              background-size: 100% 100%;
+              margin-top: 8px;
+
+              .num {
+                font-size: 24px;
+                color: #ffb315;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+              }
+              .text {
+                font-size: 18px;
+                color: #ffffff;
+                height: 50px;
+                line-height: 50px;
+                text-align: left;
+                overflow: hidden;
+              }
+            }
+          }
         }
       }
     }

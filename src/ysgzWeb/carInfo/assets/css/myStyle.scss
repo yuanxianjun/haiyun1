@@ -73,7 +73,47 @@ body {
         box-sizing: border-box;
         display:flex;
         flex-direction:row;
-        
+        position:relative;
+        .search_div{
+            width: 348px;
+	        height: 34px;
+            position: absolute;
+            top:-20px;
+            right:338px;
+            // background:#fff;
+            background:url(../search.png) no-repeat center center;
+            background-size: 100% 100%;
+            text-align: center;
+            line-height: 34px;
+            .condition{
+                font-size: 18px;
+                color: #00ccff;
+            }
+            img{
+                width: 18px;
+                 height: 18px;
+                float:right;
+                margin-top:8px;
+                margin-right:12px;
+                cursor: pointer;
+            }
+            .el-input__inner {
+                -webkit-appearance: none;
+                background-color: transparent;
+                background-image: none;
+                border-radius: 4px;
+                border: none;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                color: #00ccff;
+                height: 35px;
+                line-height:30px;
+            }
+            ::-webkit-input-placeholder{
+                color:#00ccff;
+            }
+           
+        }
         .left{
             width: 655px;
             height: 703px;
@@ -125,6 +165,13 @@ body {
             }
         }
         // 更改tab标签的样式
+        .el-table--group::after, .el-table--border::after, .el-table::before {
+            content: '';
+            position: absolute;
+            background-color: transparent;
+            z-index: 1;
+        }
+       
         .el-tabs--card > .el-tabs__header {
             border:none;
             // border-bottom: 1px solid #e4e7ed;
@@ -208,6 +255,12 @@ body {
                     width:20px;
                     height:20px;
                 }
+            }
+            .el-timeline-item__tail {
+                position: absolute;
+                left: 4px;
+                height: 100%;
+                border-left: 2px solid #00bfff;
             }
             .el-timeline-item__timestamp {
                 color: #ffffff;
@@ -304,7 +357,6 @@ body {
                 line-height: 18px;
                 letter-spacing: 2px;
                 color: #52a1ce;
-                
             }
             .address{
                 width:200px;
@@ -312,7 +364,7 @@ body {
                 font-size: 18px;
                 color: #00ccff;
                 padding-top:7px;
-                padding-bottom:7px;
+                padding-bottom:3px;
             }
             .driver{
                 font-size:18px;

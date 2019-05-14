@@ -8,7 +8,7 @@
         <comOut></comOut>
         <div class="carImg">
           <div class="img">
-            <img src="./assets/3.jpg" alt>
+            <img src="./assets/3.png" alt>
           </div>
           <div class="info">
             <ul class="leftUl">
@@ -78,7 +78,13 @@
           </el-timeline>
         </div>
       </div>
-      <div class="search_div"></div>
+      <div class="search_div">
+        <!-- <el-input v-model="searchValue" placeholder="查询条件"></el-input> -->
+        <span class="condition">查询条件</span>
+        <a href="carSearch.html">
+          <img src="./assets/searchBtn.png" alt>
+        </a>
+      </div>
     </div>
     <div class="bottom_content">
       <div class="bottom_header">
@@ -115,11 +121,13 @@ import comOut from "../components/comOut";
 import backHome from "../components/toHome";
 
 // caurap
-var caurap 
+var caurap;
 export default {
   name: "searchPerson",
   data() {
     return {
+      searchValue: "",
+      carImg: 'require("./assets/scrap.png")',
       // 时间轴 数据
       activities: [
         {
@@ -133,7 +141,8 @@ export default {
         {
           content: "支持自定义颜色",
           timestamp: "2018-04-03 20:46",
-          color: "#0bbd87"
+          color: "#0bbd87",
+          img: "./assets/scrap.png"
         },
         {
           content: "支持自定义尺寸",
@@ -170,9 +179,11 @@ export default {
   watch: {},
   mounted() {
     this.swiper = new Swiper(".swiper-container", {
-      slidesPerView: 3,
-      centeredSlides: true,
-      spaceBetween: 20
+      slidesPerView: "auto",
+      spaceBetween: 20,
+      initialSlide: 0,
+      grabCursor: true,
+      freeMode: true
     });
   },
   methods: {

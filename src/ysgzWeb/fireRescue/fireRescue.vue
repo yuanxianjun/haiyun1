@@ -63,6 +63,7 @@
         <el-col class="fire_left_ztj">
           <el-col class="fire_left_ztj_tit">
             <span>中队接处警数据分析</span>
+            <img class="intoPng" @click="showMore" src="../../common/images/into.png" alt>
           </el-col>
           <el-col class="fire_left_jw_cont">
             <el-row>
@@ -81,7 +82,8 @@
             <el-row v-show="midJj == 'zhongdui'">
               <el-col
                 v-for="(item,index) in detachMentData_z"
-                :class="'fire_left_jw_cont_'+index"
+                v-if="index < 5"
+                :class="'fire_left_jw_cont_' + index"
                 :key="index"
               >
                 <el-col :class="'fire_left_jw_cont_'+index+'_index'">NO.{{index+1}}</el-col>
@@ -89,22 +91,7 @@
                 <el-col class="fire_left_jw_cont_num">{{item.num}}</el-col>
               </el-col>
 
-              <!-- <el-col class="fire_left_jw_cont_1">
-                <el-col class="fire_left_jw_cont_white_index">NO.2</el-col>
-                <el-col class="fire_left_jw_cont_text">{{detachMentData_z[1].name}}</el-col>
-                <el-col class="fire_left_jw_cont_num">{{detachMentData_z[1].num}}</el-col>
-              </el-col>
-              <el-col class="fire_left_jw_cont_2">
-                <el-col class="fire_left_jw_cont_red_index">NO.3</el-col>
-                <el-col class="fire_left_jw_cont_text">{{detachMentData_z[2].name}}</el-col>
-                <el-col class="fire_left_jw_cont_num">{{detachMentData_z[2].num}}</el-col>
-              </el-col>
-              <el-col class="fire_left_jw_cont_3">
-                <el-col class="fire_left_jw_cont_blue_index">NO.4</el-col>
-                <el-col class="fire_left_jw_cont_text">{{detachMentData_z[3].name}}</el-col>
-                <el-col class="fire_left_jw_cont_num">{{detachMentData_z[3].num}}</el-col>
-              </el-col>
-              <el-col class="fire_left_jw_cont_4">
+              <!-- <el-col class="fire_left_jw_cont_4">
                 <el-col class="fire_left_jw_cont_blue_index">NO.5</el-col>
                 <el-col class="fire_left_jw_cont_text">{{detachMentData_z[4].name}}</el-col>
                 <el-col class="fire_left_jw_cont_num">{{detachMentData_z[4].num}}</el-col>
@@ -115,10 +102,10 @@
                 v-for="(item,index) in detachMentData"
                 :class="'fire_left_jw_cont_'+index"
                 :key="index"
-                v-if="index < 6"
+                v-if="index < 5"
               >
                 <el-col class="fire_left_jw_cont_0_index" style="width: 50px;">NO.{{index+1}}</el-col>
-                <el-col style="width: 75px;" class="fire_left_jw_cont_text">贵A.6687</el-col>
+                <el-col style="width: 75px;" class="fire_left_jw_cont_text">贵{{item.carNumber}}</el-col>
                 <el-col style="width: 65px;" class="fire_left_jw_cont_text">{{item.carName}}</el-col>
                 <el-col class="fire_left_jw_cont_text" style="width: 94px;">{{item.orgName}}</el-col>
                 <el-col class="fire_left_jw_cont_num" style="width: 72px;">{{item.num}}</el-col>
@@ -129,53 +116,33 @@
                 <el-col style="width: 65px;" class="fire_left_jw_cont_text">登高车</el-col>
                 <el-col class="fire_left_jw_cont_text" style="width: 94px;">XXXXXX中队...</el-col>
                 <el-col class="fire_left_jw_cont_num" style="width: 72px;">1234</el-col>
-              </el-col>
-              <el-col class="fire_left_jw_cont_red">
-                <el-col class="fire_left_jw_cont_red_index" style="width: 50px;">NO.3</el-col>
-                <el-col style="width: 75px;" class="fire_left_jw_cont_text">贵A.6687</el-col>
-                <el-col style="width: 65px;" class="fire_left_jw_cont_text">登高车</el-col>
-                <el-col class="fire_left_jw_cont_text" style="width: 94px;">XXXXXX中队...</el-col>
-                <el-col class="fire_left_jw_cont_num" style="width: 72px;">1234</el-col>
-              </el-col>
-              <el-col class="fire_left_jw_cont_blue">
-                <el-col class="fire_left_jw_cont_blue_index" style="width: 50px;">NO.4</el-col>
-                <el-col style="width: 75px;" class="fire_left_jw_cont_text">贵A.6687</el-col>
-                <el-col style="width: 65px;" class="fire_left_jw_cont_text">登高车</el-col>
-                <el-col class="fire_left_jw_cont_text" style="width: 94px;">XXXXXX中队...</el-col>
-                <el-col class="fire_left_jw_cont_num" style="width: 72px;">1234</el-col>
-              </el-col>
-              <el-col class="fire_left_jw_cont_blue">
-                <el-col class="fire_left_jw_cont_blue_index" style="width: 50px;">NO.5</el-col>
-                <el-col style="width: 75px;" class="fire_left_jw_cont_text">贵A.6687</el-col>
-                <el-col style="width: 65px;" class="fire_left_jw_cont_text">登高车</el-col>
-                <el-col class="fire_left_jw_cont_text" style="width: 94px;">XXXXXX中队...</el-col>
-                <el-col class="fire_left_jw_cont_num" style="width: 72px;">1234</el-col>
               </el-col>-->
             </el-row>
-            <el-row>
+            <el-row v-if="concatSelf.rank">
               <el-col class="fire_left_jw_cont_ccc">
                 <el-col
                   class="fire_left_jw_cont_ccc_index"
                   :style="midJj == 'cheliang' ? 'width: 50px;' : '100px;'"
-                >NO.131</el-col>
+                >NO.{{concatSelf.rank?concatSelf.rank:"" }}</el-col>
                 <el-col
                   style="width: 75px;"
                   v-show="midJj == 'cheliang'"
                   class="fire_left_jw_cont_text"
-                >贵A.6687</el-col>
+                >贵{{concatSelf.carNumber}}</el-col>
                 <el-col
                   style="width: 65px;"
                   v-show="midJj == 'cheliang'"
                   class="fire_left_jw_cont_text"
-                >登高车</el-col>
+                >{{concatSelf.carName}}</el-col>
                 <el-col
                   class="fire_left_jw_cont_text"
                   :style="midJj == 'cheliang' ? 'width: 94px;' : '180px;'"
-                >{{midJj == 'cheliang' ? "遵义XXXXXXXX中队" : '遵义XXXXXXXX中队' }}</el-col>
+                >{{midJj == 'cheliang'?concatSelf.carName:concatSelf.orgName}}</el-col>
+
                 <el-col
                   class="fire_left_jw_cont_num"
                   :style="midJj == 'cheliang' ? 'width: 72px;' : '80px;'"
-                >1234</el-col>
+                >{{concatSelf.num}}</el-col>
               </el-col>
             </el-row>
           </el-col>
@@ -326,12 +293,29 @@
         </el-col>
       </el-col>
     </el-row>
+    <div class="showMoreDiv" v-if="showMore_bool">
+      <el-table :data="modalData" stripe style="width: 100%">
+        <template v-if="midJj == 'zhongdui'">
+          <el-table-column prop="rank" label="排名" width="180"></el-table-column>
+          <el-table-column prop="name" label="中队名称" width="180"></el-table-column>
+          <el-table-column prop="num" label="数量"></el-table-column>
+        </template>
+        <template v-else>
+          <el-table-column prop="rank" label="排名" width="180"></el-table-column>
+          <el-table-column prop="carNumber" label="车牌号" width="180"></el-table-column>
+          <el-table-column prop="carName" label="类型"></el-table-column>
+          <el-table-column prop="orgName" label="所属中队"></el-table-column>
+          <el-table-column prop="num" label="数量"></el-table-column>
+        </template>
+      </el-table>
+      <div class="closeImg" @click="showMore_bool=false">
+        <img src="../../common/images/bubble_close.png" alt>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { test } from "@/common/static/service/apiData";
-
 import echarts from "echarts";
 import mapCity from "./components/mapCity";
 import fireFannl from "./components/funnal";
@@ -346,6 +330,9 @@ export default {
   name: "fire",
   data() {
     return {
+      // 中队和车辆展示更多
+      showMore_bool: false,
+      modalData: [],
       // 日历选择两个的时候不能同时更改
       unlinkPannle: true,
       userId: "9dec404c5bc94ceda23df4f3b821351d",
@@ -416,8 +403,42 @@ export default {
         {
           name: "中队",
           num: 23424
+        },
+        {
+          name: "中队",
+          num: 23424
+        },
+        {
+          rank: "232",
+          name: "中队",
+          num: 23424
+        },
+        {
+          name: "中队",
+          num: 23424
+        },
+        {
+          name: "中队",
+          num: 23424
+        },
+        {
+          name: "中队",
+          num: 23424
+        },
+        {
+          name: "中队",
+          num: 23424
         }
       ],
+      // 自己的一项值
+      concatSelf: {
+        // rank: 111,
+        // name: "我自己",
+        // carNumber: "H666",
+        // carName: "泡沫车",
+        // orgName: "贵阳消防中队",
+        // num: "666"
+      },
       // 灾情统计分析
       statisticAnalysisData: {}
     };
@@ -466,6 +487,11 @@ export default {
     this.$refs.site.siteAndFireCauseData_gd(option);
   },
   methods: {
+    // 中队和车辆展示更多
+    showMore() {
+      this.showMore_bool = true;
+      console.log(this.showMore_bool);
+    },
     // 灾情质量分析
     qulityData_gd(options) {
       this.axios({
@@ -502,7 +528,6 @@ export default {
         }
       });
     },
-
     // 中队接触警数据分析——车辆
     detachment_gd(options) {
       this.axios({
@@ -513,8 +538,17 @@ export default {
         if (res.status == 200) {
           if (res.data.result) {
             var data = res.data.result;
-            this.detachMentData = data;
-            console.log(data, "中队接触警数据分析");
+            this.detachMentData = data.list.map((item, index) => {
+              item.rank = parseInt(index) + 1;
+              return item;
+            });
+            this.modalData = this.detachMentData;
+
+            console.log(this.modalData, "车辆信息");
+
+            if (data.self) {
+              this.concatSelf = data.self;
+            }
           }
         } else {
           console.log("请求错误");
@@ -531,7 +565,15 @@ export default {
         if (res.status == 200) {
           if (res.data.result) {
             var data = res.data.result;
-            this.detachMentData_z = data;
+            this.detachMentData_z = data.list.map((item, index) => {
+              item.rank = parseInt(index) + 1;
+              return item;
+            });
+            this.modalData = this.detachMentData_z;
+
+            if (data.self) {
+              this.concatSelf = data.self;
+            }
             console.log(data, "中队接触警数据分析中队");
           }
         } else {
@@ -624,7 +666,6 @@ export default {
         this.planAnlyz(option);
         // 灾情质量分析
         this.qulityData_gd(option);
-
         //  火灾趋势分析
         this.$refs.lineChild.fireFrend_gd(option_userId);
         // 火灾场所
@@ -633,12 +674,13 @@ export default {
     },
     clickMidJj(val) {
       this.midJj = val;
+      if (val == "zhongdui") {
+        this.modalData = this.detachMentData_z;
+      } else {
+        this.modalData = this.detachMentData;
+      }
     },
-    testtest() {
-      test().then(res => {
-        console.log(res);
-      });
-    },
+
     formatDate(date) {
       var y = date.getFullYear();
       var m = date.getMonth() + 1;
@@ -1005,6 +1047,82 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
+  // 弹出框
+  .showMoreDiv {
+    width: 917px;
+    height: 650px;
+    position: relative;
+    top: -864px;
+    left: 500px;
+    background: url(../../common/images/modal.png) no-repeat center center;
+    background-size: 100% 100%;
+    z-index: 999;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    // 更改表格样式
+    .el-table {
+      position: relative;
+      overflow: hidden;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      width: 100%;
+      max-width: 100%;
+      background: transparent !important;
+      font-size: 14px;
+      color: #fff;
+    }
+    .el-table--enable-row-hover .el-table__body tr:hover > td {
+      opacity: 0.8;
+      background: transparent;
+    }
+    .el-table--group::after,
+    .el-table--border::after,
+    .el-table::before {
+      content: "";
+      position: absolute;
+      background-color: transparent;
+      z-index: 1;
+    }
+    // .el-table tr {
+    //   background-color: transparent;
+    // }
+    .el-table tr {
+      background-color: transparent;
+    }
+
+    .el-table th {
+      white-space: nowrap;
+      overflow: hidden;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      background-color: transparent;
+    }
+    .el-table th.is-leaf,
+    .el-table td {
+      border-bottom: none;
+    }
+    .el-table--striped .el-table__body tr.el-table__row--striped td {
+      background: rgba(70, 150, 187, 0.5);
+    }
+    .el-table thead {
+      color: #00ccff;
+      font-weight: 500;
+    }
+    .closeImg {
+      position: absolute;
+      right: 15px;
+      top: 20px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+  }
   .header_mb {
     text-align: right;
     margin-bottom: 20px;
@@ -1039,6 +1157,11 @@ export default {
         @include tit_back;
         span {
           @include tit_text;
+        }
+        img {
+          float: right;
+          margin-top: 12px;
+          cursor: pointer;
         }
       }
       .fire_left_ztj_cont {
@@ -1421,7 +1544,7 @@ export default {
               text-align: center;
               font-size: 14px;
               color: rgba(255, 255, 255, 1);
-              line-height: 27px;
+              line-height: 26px;
             }
           }
         }

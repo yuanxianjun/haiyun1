@@ -153,9 +153,10 @@ export default {
         {
           link: "/personData",
           name: "人员数据"
-        },{
-          link:"",
-          name:"车辆搜索"
+        },
+        {
+          link: "",
+          name: "车辆搜索"
         }
       ],
       dateTimeValue: "",
@@ -382,7 +383,7 @@ body {
     margin-top: 11px;
   }
   .color-grind {
-    font-size: 24px;
+    // font-size: 24px;
     background: linear-gradient(to bottom, #02f4fb, #0f84d4);
     -webkit-background-clip: text;
     color: transparent;

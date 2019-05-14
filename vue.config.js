@@ -94,7 +94,18 @@ module.exports = {
             entry: 'src/ysgzWeb/personInfo/personInfo.js',
             template: 'src/ysgzWeb/personInfo/personInfo.html',
             filename: 'personInfo.html'
+        },
+        // 三级页面 ——> 灾情数据分析
+        'ana_situation': {
+            entry: 'src/ysgzWeb/ana_situation/ana_situation.js',
+            template: 'src/ysgzWeb/ana_situation/ana_situation.html',
+            filename: 'ana_situation.html'
+        },
+        // 三级页面 ——> 灾情数据分析
+        'fire_help': {
+            entry: 'src/ysgzWeb/fire_help/fire_help.js',
+            template: 'src/ysgzWeb/fire_help/fire_help.html',
+            filename: 'fire_help.html'
         }
-
     }
 }

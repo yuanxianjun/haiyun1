@@ -2,7 +2,7 @@
   <div>
     <div class="navigate">
       <img class="homeIcon" src="../../common/images/home.png" alt>
-      <a class="_link" href="ysgzIndex.html">首页</a>
+      <a class="_link color-grind" href="ysgzIndex.html">首页</a>
       <template v-if="typeof localPage == 'string'">
         <span class="littleHeng">-</span>
         <span class="color-grind">{{localPage}}</span>
@@ -11,7 +11,7 @@
         <template v-for="(page,index) in localPage">
           <span class="littleHeng">-</span>
           <template v-if="index < localPage.length-1">
-            <a class="_link" :href="page.link">{{page.name}}</a>
+            <a class="_link color-grind" :href="page.link">{{page.name}}</a>
           </template>
           <template v-else>
             <span class="color-grind">{{page.name}}</span>
